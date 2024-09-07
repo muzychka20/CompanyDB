@@ -17,6 +17,9 @@ namespace CompanyDB.Views
             InitializeComponent();
             btnEmployees.Click += delegate { ShowEmployeeView?.Invoke(this, EventArgs.Empty); };
             btnExit.Click += delegate { this.Close(); };
+            this.BackColor = Color.LightBlue; // Вы можете использовать любой цвет по вашему выбору
+            this.BackColor = Color.LightSteelBlue;
+
         }
 
         public event EventHandler ShowEmployeeView;        

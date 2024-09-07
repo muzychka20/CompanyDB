@@ -39,6 +39,7 @@ namespace CompanyDB.Models
 
         [DisplayName("Salary")]
         [Required(ErrorMessage = "Salary is required!")]
+        [RegularExpression(@"^\d{1,16}(\.\d{0,2})?$", ErrorMessage = "Salary must be a valid decimal!")]
         public decimal Salary { get => salary; set => salary = value; }
 
         [DisplayName("Location")]

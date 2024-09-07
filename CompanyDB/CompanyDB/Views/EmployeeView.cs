@@ -23,19 +23,74 @@ namespace CompanyDB.Views
             InitializeComponent();
             AssociateAndRaiseViewEvents();
             tabControl.TabPages.Remove(employeeDetailTab);          
-            this.Load += delegate { ShowAllEvent?.Invoke(this, EventArgs.Empty); };
+            this.Load += delegate { ShowAllEvent?.Invoke(this, EventArgs.Empty); };                                                        
         }
 
         private void AssociateAndRaiseViewEvents()
         {
+            // Exit
             exitToolStripMenuItem.Click += delegate { this.Close(); };
+
+            // Get all
             getAllToolStripMenuItem.Click += delegate { ShowAllEvent?.Invoke(this, EventArgs.Empty); };
+            
+            // Add new
+            newToolStripMenuItem.Click += delegate 
+            {
+                employeeToolStripMenuItem.Enabled = false;
+                AddNewEvent?.Invoke(this, EventArgs.Empty);
+                tabControl.TabPages.Remove(employeesListTab);
+                tabControl.TabPages.Add(employeeDetailTab);
+                employeeDetailTab.Text = "Add new employee";
+            };
+
+            // Edit
+            editToolStripMenuItem.Click += delegate {
+                employeeToolStripMenuItem.Enabled = false;
+                EditEvent?.Invoke(this, EventArgs.Empty);
+                tabControl.TabPages.Remove(employeesListTab);
+                tabControl.TabPages.Add(employeeDetailTab);
+                employeeDetailTab.Text = "Edit employee";
+            };
+
+            // Delete
+            deleteToolStripMenuItem.Click += delegate {             
+                var result = MessageBox.Show("Are you sure you want to delete the selected employee?", "Warning", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    DeleteEvent?.Invoke(this, EventArgs.Empty);
+                    MessageBox.Show(Message);
+                }
+            };
+
+            // Cancel
+            btnCancel.Click += delegate 
+            {
+                tabControl.TabPages.Remove(employeeDetailTab);
+                tabControl.TabPages.Add(employeesListTab);
+                CancelEvent?.Invoke(this, EventArgs.Empty);
+                employeeToolStripMenuItem.Enabled = true;
+            };
+
+            // Save changes
+            btnSave.Click += delegate 
+            { 
+                SaveEvent?.Invoke(this, EventArgs.Empty);
+                if (isSuccessful)
+                {
+                    tabControl.TabPages.Remove(employeeDetailTab);
+                    tabControl.TabPages.Add(employeesListTab);                    
+                    employeeToolStripMenuItem.Enabled = true;
+                }
+                MessageBox.Show(Message);
+            };
         }
 
         // Properties
-        public int Id 
+        public string Id 
         { 
-            get => int.Parse(txtId.Text);
+            get => txtId.Text;
             set => txtId.Text = value.ToString();
         }
         public string FirstName 
@@ -53,9 +108,9 @@ namespace CompanyDB.Views
             get => txtPosition.Text;
             set => txtPosition.Text = value;
         }
-        public float Salary 
+        public string Salary 
         {
-            get => float.Parse(txtSalary.Text);
+            get => txtSalary.Text;
             set => txtSalary.Text = value.ToString();
         }
         public bool IsEdit 
@@ -73,9 +128,9 @@ namespace CompanyDB.Views
             get => message;
             set => message = value;
         }
-        int IEmployeeView.Location
+        string IEmployeeView.Location
         {
-            get => int.Parse(txtLocation.Text);
+            get => txtLocation.Text;
             set => txtLocation.Text = value.ToString();
         }
 

@@ -29,38 +29,54 @@
         private void InitializeComponent()
         {
             panelMenu = new Panel();
-            btnExit = new Button();
+            panel1 = new Panel();
+            label1 = new Label();
             btnEmployees = new Button();
+            btnExit = new Button();
             panelMenu.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panelMenu
             // 
-            panelMenu.BackColor = SystemColors.ActiveCaption;
+            panelMenu.BackColor = Color.Teal;
+            panelMenu.Controls.Add(panel1);
             panelMenu.Controls.Add(btnExit);
-            panelMenu.Controls.Add(btnEmployees);
             panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(0, 0);
             panelMenu.Margin = new Padding(4);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(150, 571);
+            panelMenu.Size = new Size(150, 573);
             panelMenu.TabIndex = 0;
             // 
-            // btnExit
+            // panel1
             // 
-            btnExit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnExit.Location = new Point(4, 524);
-            btnExit.Margin = new Padding(4);
-            btnExit.Name = "btnExit";
-            btnExit.Size = new Size(142, 43);
-            btnExit.TabIndex = 1;
-            btnExit.Text = "Exit";
-            btnExit.UseVisualStyleBackColor = true;
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(btnEmployees);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(150, 486);
+            panel1.TabIndex = 2;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Teal;
+            label1.ForeColor = SystemColors.Control;
+            label1.Location = new Point(4, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(77, 28);
+            label1.TabIndex = 1;
+            label1.Text = "Models";
             // 
             // btnEmployees
             // 
+            btnEmployees.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btnEmployees.Cursor = Cursors.Hand;
+            btnEmployees.FlatAppearance.BorderSize = 0;
             btnEmployees.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnEmployees.Location = new Point(4, 92);
+            btnEmployees.Location = new Point(4, 41);
             btnEmployees.Margin = new Padding(4);
             btnEmployees.Name = "btnEmployees";
             btnEmployees.Size = new Size(142, 43);
@@ -68,18 +84,43 @@
             btnEmployees.Text = "Employees";
             btnEmployees.UseVisualStyleBackColor = true;
             // 
+            // btnExit
+            // 
+            btnExit.BackColor = Color.IndianRed;
+            btnExit.Cursor = Cursors.Hand;
+            btnExit.Dock = DockStyle.Bottom;
+            btnExit.FlatAppearance.BorderColor = Color.Gray;
+            btnExit.FlatAppearance.BorderSize = 0;
+            btnExit.FlatAppearance.MouseDownBackColor = Color.Brown;
+            btnExit.FlatAppearance.MouseOverBackColor = Color.Maroon;
+            btnExit.FlatStyle = FlatStyle.Flat;
+            btnExit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnExit.ForeColor = SystemColors.Control;
+            btnExit.Location = new Point(0, 532);
+            btnExit.Margin = new Padding(4);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(150, 41);
+            btnExit.TabIndex = 1;
+            btnExit.Text = "Exit";
+            btnExit.UseVisualStyleBackColor = false;
+            // 
             // MainView
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1257, 571);
+            BackColor = Color.Snow;
+            BackgroundImageLayout = ImageLayout.None;
+            ClientSize = new Size(1257, 573);
             Controls.Add(panelMenu);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             IsMdiContainer = true;
             Margin = new Padding(4);
+            MinimumSize = new Size(1275, 620);
             Name = "MainView";
-            Text = "MainView";
+            Text = "Main";
             panelMenu.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -88,5 +129,7 @@
         private Panel panelMenu;
         private Button btnEmployees;
         private Button btnExit;
+        private Panel panel1;
+        private Label label1;
     }
 }

@@ -10,12 +10,12 @@ namespace CompanyDB.Views
     public interface IEmployeeView
     {
         // Properties - Fields
-        int Id { get; set; }
+        string Id { get; set; }
         string FirstName { get; set; }
         string LastName { get; set; }
         string Position { get; set; }
-        float Salary { get; set; }
-        int Location { get; set; }
+        string Salary { get; set; }
+        string Location { get; set; }
         
         bool IsEdit {  get; set; } 
         bool IsSuccessful { get; set; }

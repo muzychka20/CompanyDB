@@ -21,17 +21,55 @@ namespace CompanyDB._Repositories
         // Methods
         public void AddEmployee(EmployeeModel employeeModel)
         {
-            throw new NotImplementedException();
+            var employeeList = new List<EmployeeModel>();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;                
+                command.CommandText = "INSERT INTO Employees values (@firstName, @lastName, @position, @salary, @location)";
+                command.Parameters.Add("@firstName", SqlDbType.NVarChar).Value = employeeModel.FirstName;
+                command.Parameters.Add("@lastName", SqlDbType.NVarChar).Value = employeeModel.LastName;
+                command.Parameters.Add("@position", SqlDbType.NVarChar).Value = employeeModel.Position;
+                command.Parameters.Add("@salary", SqlDbType.Decimal).Value = employeeModel.Salary;
+                command.Parameters.Add("@location", SqlDbType.Int).Value = employeeModel.Location;
+                command.ExecuteNonQuery();
+            }
         }
 
         public void DeleteEmployee(int id)
         {
-            throw new NotImplementedException();
+            var employeeList = new List<EmployeeModel>();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "DELETE FROM Employees WHERE EmployeeId = @id";
+                command.Parameters.Add("@id", SqlDbType.Int).Value = id;                
+                command.ExecuteNonQuery();
+            }
         }
 
         public void EditEmployee(EmployeeModel employeeModel)
         {
-            throw new NotImplementedException();
+            var employeeList = new List<EmployeeModel>();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = @"UPDATE Employees 
+                                        SET FirstName = @firstName, LastName = @lastName, Position = @position, Salary = @salary, Location = @location 
+                                        WHERE EmployeeId = @id";
+                command.Parameters.Add("@id", SqlDbType.Int).Value = employeeModel.Id;
+                command.Parameters.Add("@firstName", SqlDbType.NVarChar).Value = employeeModel.FirstName;
+                command.Parameters.Add("@lastName", SqlDbType.NVarChar).Value = employeeModel.LastName;
+                command.Parameters.Add("@position", SqlDbType.NVarChar).Value = employeeModel.Position;
+                command.Parameters.Add("@salary", SqlDbType.Decimal).Value = employeeModel.Salary;
+                command.Parameters.Add("@location", SqlDbType.Int).Value = employeeModel.Location;
+                command.ExecuteNonQuery();
+            }
         }
 
         public IEnumerable<EmployeeModel> GetAllEmployees()
