@@ -21,7 +21,7 @@ BEGIN
 	BEGIN
 		INSERT INTO Countries (CountryName) VALUES (@CountryName);
 		SET @CountryId = SCOPE_IDENTITY();
-  END
+	END
 	ELSE
 	BEGIN
 		SELECT @CountryId = CountryId FROM Countries WHERE CountryName = @CountryName;
@@ -32,18 +32,18 @@ BEGIN
 	BEGIN
 		INSERT INTO Cities(CityName, CountryId) VALUES (@CityName, @CountryId);
 		SET @CityId = SCOPE_IDENTITY();
-  END
+	END
 	ELSE
 	BEGIN
 		SELECT @CityId = CityId FROM Cities WHERE CityName = @CityName AND CountryId = @CountryId;
-  END;
+	END;
 	
 	-- Add the street if it doesn't exist (considering the city)
 	IF NOT EXISTS (SELECT 1 FROM Streets WHERE StreetName = @StreetName AND CityId = @CityId)
 	BEGIN
 		INSERT INTO Streets(StreetName, CityId) VALUES (@StreetName, @CityId);
 		SET @StreetId = SCOPE_IDENTITY();
-  END
+	END
 	ELSE
 	BEGIN
 		SELECT @StreetId = StreetId FROM Streets WHERE StreetName = @StreetName AND CityId = @CityId;
@@ -54,7 +54,7 @@ BEGIN
 	BEGIN
 		INSERT INTO Houses(HouseNumber, StreetId) VALUES (@HouseNumber, @StreetId);
 		SET @HouseId = SCOPE_IDENTITY();
-  END
+	END
 	ELSE
 	BEGIN
 		SELECT @HouseId = HouseId FROM Houses WHERE HouseNumber = @HouseNumber AND StreetId = @StreetId;
@@ -67,6 +67,6 @@ BEGIN
 
 	-- Add the employee
 	INSERT INTO Employees (FirstName, LastName, Position, Salary, Location)
-  VALUES (@FirstName, @LastName, @Position, @Salary, @ApartmentId);
+	VALUES (@FirstName, @LastName, @Position, @Salary, @ApartmentId);
 END
 GO
