@@ -1,20 +1,30 @@
 USE CompanyDB;
 
-EXEC sp_AddEmployee 
-		@FirstName = 'First Name',
-		@LastName = 'Last Name',
-		@Position='Position',
-		@Salary = 1000.00,
-		@Location = 1;
-
 EXEC sp_GetAllEmployees;
 
-EXEC sp_UpdateEmployee 
-		@EmployeeId = 1,
-		@FirstName = 'New First Name',
-		@LastName = 'New Last Name',
-		@Position='New Position',
-		@Salary = 2000.00,
-		@Location = 1;
+EXEC sp_AddEmployee 
+    @FirstName = 'Name',
+    @LastName = 'LName',
+    @Position = 'Manager',
+    @Salary = 5000.00,
+    @CountryName = 'Ukraine',
+    @CityName = 'Kyiv',
+    @StreetName = 'Street',
+    @HouseNumber = '10',
+    @ApartmentNumber = '25',
+    @FloorNumber = '5';
 
-EXEC sp_DeleteEmployee 1;
+EXEC sp_UpdateEmployee 
+    @EmployeeId = 7,
+    @FirstName = 'Ivan',
+    @LastName = 'Ivanov',
+    @Position = 'Developer',
+    @Salary = 12000.00,
+    @CountryName = 'Germany',
+    @CityName = 'Berlin',
+    @StreetName = 'STREET',
+    @HouseNumber = '5',
+    @ApartmentNumber = '50',
+    @FloorNumber = '10';
+
+EXEC sp_DeleteEmployee 3;

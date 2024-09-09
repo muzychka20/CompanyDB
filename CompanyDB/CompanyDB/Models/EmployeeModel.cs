@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
 namespace CompanyDB.Models
@@ -16,7 +11,15 @@ namespace CompanyDB.Models
         private string lastName;
         private string position;
         private decimal salary;
-        private int location;
+        
+        // Address
+        private string countryName;
+        private string cityName;
+        private string streetName;
+        private string houseNumber;
+        private string floorNumber;
+        private string apartmentNumber;
+
 
         // Properties - Validation
         [DisplayName("Id")]
@@ -42,9 +45,34 @@ namespace CompanyDB.Models
         [RegularExpression(@"^\d{1,16}(\.\d{0,2})?$", ErrorMessage = "Salary must be a valid decimal!")]
         public decimal Salary { get => salary; set => salary = value; }
 
-        [DisplayName("Location")]
-        [Required(ErrorMessage = "Location is required!")]
-        public int Location { get => location; set => location = value; }
+        [DisplayName("Country")]
+        [Required(ErrorMessage = "Country is required!")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Country must be between 3 and 50 characters!")]
+        public string CountryName { get => countryName; set => countryName = value; }
 
+        [DisplayName("City")]
+        [Required(ErrorMessage = "City is required!")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "City must be between 3 and 50 characters!")]
+        public string CityName { get => cityName; set => cityName = value; }
+
+        [DisplayName("Street")]
+        [Required(ErrorMessage = "Street is required!")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Street must be between 3 and 50 characters!")]
+        public string StreetName { get => streetName; set => streetName = value; }
+
+        [DisplayName("House Number")]
+        [Required(ErrorMessage = "House Number is required!")]
+        [StringLength(10, MinimumLength = 1, ErrorMessage = "Street must be between 1 and 10 characters!")]
+        public string HouseNumber { get => houseNumber; set => houseNumber = value; }
+
+        [DisplayName("Floor Number")]
+        [Required(ErrorMessage = "Floor Number is required!")]
+        [StringLength(10, MinimumLength = 1, ErrorMessage = "Floor must be between 1 and 10 characters!")]
+        public string FloorNumber { get => floorNumber; set => floorNumber = value; }
+
+        [DisplayName("Apartment Number")]
+        [Required(ErrorMessage = "Apartment Number is required!")]
+        [StringLength(10, MinimumLength = 1, ErrorMessage = "Apartment must be between 1 and 10 characters!")]
+        public string ApartmentNumber { get => apartmentNumber; set => apartmentNumber = value; }
     }
 }

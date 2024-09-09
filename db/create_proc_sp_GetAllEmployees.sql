@@ -10,12 +10,12 @@ BEGIN
         Employees.LastName AS 'Last Name',
         Employees.Position AS 'Position',
         Employees.Salary AS 'Salary',
-        Apartments.ApartmentNumber AS 'Apartment',
-        Apartments.FloorNumber AS 'Floor',        
-        Houses.HouseNumber AS 'House',
-        Streets.StreetName AS 'Street',
+        Countries.CountryName AS 'Country',
         Cities.CityName AS 'City',
-        Countries.CountryName AS 'Country'
+        Streets.StreetName AS 'Street',
+        Houses.HouseNumber AS 'House',
+        Apartments.FloorNumber AS 'Floor',        
+        Apartments.ApartmentNumber AS 'Apartment'
     FROM Employees
     JOIN Apartments ON Apartments.ApartmentId = Employees.Location
     JOIN Houses ON Houses.HouseId = Apartments.HouseId

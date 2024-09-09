@@ -35,11 +35,21 @@
             employeesListTab = new TabPage();
             dataGridView = new DataGridView();
             employeeDetailTab = new TabPage();
-            label1 = new Label();
+            txtApartmentNumber = new TextBox();
+            labelApartmentNumber = new Label();
+            txtFloorNumber = new TextBox();
+            labelFloorNumber = new Label();
+            txtHouseNumber = new TextBox();
+            labelHouseNumber = new Label();
+            txtStreetName = new TextBox();
+            labelStreet = new Label();
+            txtCityName = new TextBox();
+            labelCity = new Label();
+            txtCountryName = new TextBox();
+            labelCountry = new Label();
             txtSalary = new NumericUpDown();
             btnCancel = new Button();
             btnSave = new Button();
-            txtLocation = new TextBox();
             txtPosition = new TextBox();
             txtLastName = new TextBox();
             txtFirstName = new TextBox();
@@ -76,7 +86,7 @@
             tabControl.Margin = new Padding(4);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(1522, 768);
+            tabControl.Size = new Size(965, 392);
             tabControl.TabIndex = 2;
             // 
             // employeesListTab
@@ -86,7 +96,7 @@
             employeesListTab.Margin = new Padding(4);
             employeesListTab.Name = "employeesListTab";
             employeesListTab.Padding = new Padding(4);
-            employeesListTab.Size = new Size(1514, 727);
+            employeesListTab.Size = new Size(957, 351);
             employeesListTab.TabIndex = 0;
             employeesListTab.Text = "Employees list";
             employeesListTab.UseVisualStyleBackColor = true;
@@ -129,16 +139,26 @@
             dataGridView.RowHeadersVisible = false;
             dataGridView.RowHeadersWidth = 51;
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView.Size = new Size(1506, 719);
+            dataGridView.Size = new Size(949, 343);
             dataGridView.TabIndex = 0;
             // 
             // employeeDetailTab
             // 
-            employeeDetailTab.Controls.Add(label1);
+            employeeDetailTab.Controls.Add(txtApartmentNumber);
+            employeeDetailTab.Controls.Add(labelApartmentNumber);
+            employeeDetailTab.Controls.Add(txtFloorNumber);
+            employeeDetailTab.Controls.Add(labelFloorNumber);
+            employeeDetailTab.Controls.Add(txtHouseNumber);
+            employeeDetailTab.Controls.Add(labelHouseNumber);
+            employeeDetailTab.Controls.Add(txtStreetName);
+            employeeDetailTab.Controls.Add(labelStreet);
+            employeeDetailTab.Controls.Add(txtCityName);
+            employeeDetailTab.Controls.Add(labelCity);
+            employeeDetailTab.Controls.Add(txtCountryName);
+            employeeDetailTab.Controls.Add(labelCountry);
             employeeDetailTab.Controls.Add(txtSalary);
             employeeDetailTab.Controls.Add(btnCancel);
             employeeDetailTab.Controls.Add(btnSave);
-            employeeDetailTab.Controls.Add(txtLocation);
             employeeDetailTab.Controls.Add(txtPosition);
             employeeDetailTab.Controls.Add(txtLastName);
             employeeDetailTab.Controls.Add(txtFirstName);
@@ -152,20 +172,118 @@
             employeeDetailTab.Margin = new Padding(4);
             employeeDetailTab.Name = "employeeDetailTab";
             employeeDetailTab.Padding = new Padding(4);
-            employeeDetailTab.Size = new Size(1514, 735);
+            employeeDetailTab.Size = new Size(1429, 509);
             employeeDetailTab.TabIndex = 1;
             employeeDetailTab.Text = "Employee detail";
             employeeDetailTab.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // txtApartmentNumber
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(632, 124);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(109, 28);
-            label1.TabIndex = 14;
-            label1.Text = "Location id";
+            txtApartmentNumber.Location = new Point(918, 323);
+            txtApartmentNumber.Margin = new Padding(4);
+            txtApartmentNumber.Name = "txtApartmentNumber";
+            txtApartmentNumber.Size = new Size(230, 34);
+            txtApartmentNumber.TabIndex = 25;
+            // 
+            // labelApartmentNumber
+            // 
+            labelApartmentNumber.AutoSize = true;
+            labelApartmentNumber.Location = new Point(918, 291);
+            labelApartmentNumber.Margin = new Padding(4, 0, 4, 0);
+            labelApartmentNumber.Name = "labelApartmentNumber";
+            labelApartmentNumber.Size = new Size(183, 28);
+            labelApartmentNumber.TabIndex = 24;
+            labelApartmentNumber.Text = "Apartment Number";
+            // 
+            // txtFloorNumber
+            // 
+            txtFloorNumber.Location = new Point(918, 241);
+            txtFloorNumber.Margin = new Padding(4);
+            txtFloorNumber.Name = "txtFloorNumber";
+            txtFloorNumber.Size = new Size(230, 34);
+            txtFloorNumber.TabIndex = 23;
+            // 
+            // labelFloorNumber
+            // 
+            labelFloorNumber.AutoSize = true;
+            labelFloorNumber.Location = new Point(918, 209);
+            labelFloorNumber.Margin = new Padding(4, 0, 4, 0);
+            labelFloorNumber.Name = "labelFloorNumber";
+            labelFloorNumber.Size = new Size(135, 28);
+            labelFloorNumber.TabIndex = 22;
+            labelFloorNumber.Text = "Floor Number";
+            // 
+            // txtHouseNumber
+            // 
+            txtHouseNumber.Location = new Point(918, 156);
+            txtHouseNumber.Margin = new Padding(4);
+            txtHouseNumber.Name = "txtHouseNumber";
+            txtHouseNumber.Size = new Size(230, 34);
+            txtHouseNumber.TabIndex = 21;
+            // 
+            // labelHouseNumber
+            // 
+            labelHouseNumber.AutoSize = true;
+            labelHouseNumber.Location = new Point(918, 124);
+            labelHouseNumber.Margin = new Padding(4, 0, 4, 0);
+            labelHouseNumber.Name = "labelHouseNumber";
+            labelHouseNumber.Size = new Size(144, 28);
+            labelHouseNumber.TabIndex = 20;
+            labelHouseNumber.Text = "House Number";
+            // 
+            // txtStreetName
+            // 
+            txtStreetName.Location = new Point(664, 323);
+            txtStreetName.Margin = new Padding(4);
+            txtStreetName.Name = "txtStreetName";
+            txtStreetName.Size = new Size(230, 34);
+            txtStreetName.TabIndex = 19;
+            // 
+            // labelStreet
+            // 
+            labelStreet.AutoSize = true;
+            labelStreet.Location = new Point(664, 291);
+            labelStreet.Margin = new Padding(4, 0, 4, 0);
+            labelStreet.Name = "labelStreet";
+            labelStreet.Size = new Size(63, 28);
+            labelStreet.TabIndex = 18;
+            labelStreet.Text = "Street";
+            // 
+            // txtCityName
+            // 
+            txtCityName.Location = new Point(664, 241);
+            txtCityName.Margin = new Padding(4);
+            txtCityName.Name = "txtCityName";
+            txtCityName.Size = new Size(230, 34);
+            txtCityName.TabIndex = 17;
+            // 
+            // labelCity
+            // 
+            labelCity.AutoSize = true;
+            labelCity.Location = new Point(664, 209);
+            labelCity.Margin = new Padding(4, 0, 4, 0);
+            labelCity.Name = "labelCity";
+            labelCity.Size = new Size(46, 28);
+            labelCity.TabIndex = 16;
+            labelCity.Text = "City";
+            // 
+            // txtCountryName
+            // 
+            txtCountryName.Location = new Point(664, 156);
+            txtCountryName.Margin = new Padding(4);
+            txtCountryName.Name = "txtCountryName";
+            txtCountryName.Size = new Size(230, 34);
+            txtCountryName.TabIndex = 15;
+            // 
+            // labelCountry
+            // 
+            labelCountry.AutoSize = true;
+            labelCountry.Location = new Point(664, 124);
+            labelCountry.Margin = new Padding(4, 0, 4, 0);
+            labelCountry.Name = "labelCountry";
+            labelCountry.Size = new Size(82, 28);
+            labelCountry.TabIndex = 14;
+            labelCountry.Text = "Country";
             // 
             // txtSalary
             // 
@@ -193,15 +311,6 @@
             btnSave.TabIndex = 11;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
-            // 
-            // txtLocation
-            // 
-            txtLocation.Location = new Point(632, 156);
-            txtLocation.Margin = new Padding(4);
-            txtLocation.Name = "txtLocation";
-            txtLocation.Size = new Size(230, 34);
-            txtLocation.TabIndex = 10;
-            txtLocation.Text = "0";
             // 
             // txtPosition
             // 
@@ -296,7 +405,7 @@
             mainMenu.Location = new Point(0, 0);
             mainMenu.Name = "mainMenu";
             mainMenu.Padding = new Padding(8, 3, 0, 3);
-            mainMenu.Size = new Size(1522, 30);
+            mainMenu.Size = new Size(965, 30);
             mainMenu.TabIndex = 1;
             // 
             // fileToolStripMenuItem
@@ -351,14 +460,14 @@
             panel.Location = new Point(0, 0);
             panel.Margin = new Padding(4);
             panel.Name = "panel";
-            panel.Size = new Size(1522, 31);
+            panel.Size = new Size(965, 31);
             panel.TabIndex = 1;
             // 
             // EmployeeView
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1522, 799);
+            ClientSize = new Size(965, 423);
             Controls.Add(tabControl);
             Controls.Add(panel);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -393,11 +502,9 @@
         private Label firstNameLabel;
         private Label idLabel;
         private TextBox txtPosition;
-        private TextBox txtLocation;
         private Button btnCancel;
         private Button btnSave;
         private NumericUpDown txtSalary;
-        private Label label1;
         private MenuStrip mainMenu;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
@@ -407,5 +514,17 @@
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStripMenuItem deleteToolStripMenuItem;
         private Panel panel;
+        private TextBox txtCountryName;
+        private Label labelCountry;
+        private TextBox txtStreetName;
+        private Label labelStreet;
+        private TextBox txtCityName;
+        private Label labelCity;
+        private TextBox txtApartmentNumber;
+        private Label labelApartmentNumber;
+        private TextBox txtFloorNumber;
+        private Label labelFloorNumber;
+        private TextBox txtHouseNumber;
+        private Label labelHouseNumber;
     }
 }

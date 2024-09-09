@@ -29,7 +29,7 @@ CREATE TABLE Houses (
 CREATE TABLE Apartments (
     ApartmentId INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     ApartmentNumber NVARCHAR(10) NOT NULL,
-    FloorNumber INT NOT NULL,
+    FloorNumber NVARCHAR(10) NOT NULL,
     HouseId INT NOT NULL,
     FOREIGN KEY (HouseId) REFERENCES Houses(HouseId)
 );

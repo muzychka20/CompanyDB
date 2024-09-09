@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CompanyDB.Models;
+﻿using CompanyDB.Models;
 using CompanyDB.Views;
 
 namespace CompanyDB.Presenters
@@ -60,11 +55,16 @@ namespace CompanyDB.Presenters
                 model.LastName = view.LastName;
                 model.Position = view.Position; 
                 model.Salary = (decimal)Convert.ToDouble(view.Salary);
-                model.Location = Convert.ToInt32(view.Location);
+                model.CountryName = view.CountryName;
+                model.CityName = view.CityName;
+                model.StreetName = view.StreetName;
+                model.HouseNumber = view.HouseNumber;
+                model.ApartmentNumber = view.ApartmentNumber;
+                model.FloorNumber = view.FloorNumber;                
                 new Common.ModelDataValidation().Validate(model);
                 if (view.IsEdit)
                 {
-                    repository.EditEmployee(model);
+                    repository.UpdateEmployee(model);
                     view.Message = "Employee edited successfully";
                 }
                 else
@@ -90,7 +90,12 @@ namespace CompanyDB.Presenters
             view.LastName = "";
             view.Position = "";
             view.Salary = "0";
-            view.Location = "0";
+            view.CountryName = "";
+            view.CityName = "";
+            view.StreetName = "";
+            view.HouseNumber = "";
+            view.ApartmentNumber = "";
+            view.FloorNumber = "";
         }
 
         private void DeleteSelectedEmployee(object? sender, EventArgs e)
@@ -106,7 +111,7 @@ namespace CompanyDB.Presenters
             catch (Exception ex)
             {
                 view.IsSuccessful = false;
-                view.Message = "An error ocurred, could not delete employee";
+                view.Message = "An error ocurred, could not delete employee" + ex.Message;
             }
         }
 
@@ -118,8 +123,13 @@ namespace CompanyDB.Presenters
             view.LastName = employee.LastName;
             view.Position = employee.Position;
             view.Salary = employee.Salary.ToString();
-            view.Location = employee.Location.ToString();
-            view.IsEdit = true;                        
+            view.CountryName = employee.CountryName;
+            view.CityName = employee.CityName;
+            view.StreetName = employee.StreetName;
+            view.HouseNumber = employee.HouseNumber;
+            view.ApartmentNumber = employee.ApartmentNumber;
+            view.FloorNumber = employee.FloorNumber;
+            view.IsEdit = true;
         }
 
         private void AddNewEmployee(object? sender, EventArgs e)

@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CompanyDB.Views
+﻿namespace CompanyDB.Views
 {
     public partial class EmployeeView : Form, IEmployeeView
     {
@@ -113,6 +103,42 @@ namespace CompanyDB.Views
             get => txtSalary.Text;
             set => txtSalary.Text = value.ToString();
         }
+
+        public string CountryName
+        {
+            get => txtCountryName.Text;
+            set => txtCountryName.Text = value;
+        }
+
+        public string CityName
+        {
+            get => txtCityName.Text;
+            set => txtCityName.Text = value;
+        }
+
+        public string StreetName
+        {
+            get => txtStreetName.Text;
+            set => txtStreetName.Text = value;
+        }
+
+        public string HouseNumber
+        {
+            get => txtHouseNumber.Text;
+            set => txtHouseNumber.Text = value;
+        }
+        public string FloorNumber
+        {
+            get => txtFloorNumber.Text;
+            set => txtFloorNumber.Text = value;
+        }
+
+        public string ApartmentNumber
+        {
+            get => txtApartmentNumber.Text;
+            set => txtApartmentNumber.Text = value;
+        }
+
         public bool IsEdit 
         {
             get => isEdit;
@@ -127,12 +153,7 @@ namespace CompanyDB.Views
         {
             get => message;
             set => message = value;
-        }
-        string IEmployeeView.Location
-        {
-            get => txtLocation.Text;
-            set => txtLocation.Text = value.ToString();
-        }
+        }        
 
         // Events        
         public event EventHandler ShowAllEvent;

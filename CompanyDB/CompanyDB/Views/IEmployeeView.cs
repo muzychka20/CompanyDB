@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CompanyDB.Views
+﻿namespace CompanyDB.Views
 {
     public interface IEmployeeView
     {
@@ -15,8 +8,13 @@ namespace CompanyDB.Views
         string LastName { get; set; }
         string Position { get; set; }
         string Salary { get; set; }
-        string Location { get; set; }
-        
+        string CountryName { get; set; }
+        string CityName { get; set; }
+        string StreetName { get; set; }
+        string HouseNumber { get; set; }
+        string FloorNumber { get; set; }
+        string ApartmentNumber { get; set; }
+
         bool IsEdit {  get; set; } 
         bool IsSuccessful { get; set; }
         string Message { get; set; }

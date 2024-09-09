@@ -110,12 +110,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Snow;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(1257, 573);
+            ClientSize = new Size(1437, 573);
             Controls.Add(panelMenu);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             IsMdiContainer = true;
             Margin = new Padding(4);
-            MinimumSize = new Size(1275, 620);
+            MinimumSize = new Size(1455, 620);
             Name = "MainView";
             Text = "Main";
             panelMenu.ResumeLayout(false);

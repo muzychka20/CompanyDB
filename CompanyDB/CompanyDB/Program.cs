@@ -1,9 +1,6 @@
 using CompanyDB.Views;
-using CompanyDB.Models;
 using CompanyDB.Presenters;
-using CompanyDB._Repositories;
 using System.Configuration;
-using System.Data.SqlClient;
 
 namespace CompanyDB
 {
