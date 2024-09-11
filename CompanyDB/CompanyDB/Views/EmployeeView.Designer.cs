@@ -35,6 +35,10 @@
             employeesListTab = new TabPage();
             dataGridView = new DataGridView();
             employeeDetailTab = new TabPage();
+            labelComboCity = new Label();
+            comboBoxCity = new ComboBox();
+            labelComboCountry = new Label();
+            comboBoxCountry = new ComboBox();
             txtApartmentNumber = new TextBox();
             labelApartmentNumber = new Label();
             txtFloorNumber = new TextBox();
@@ -86,7 +90,7 @@
             tabControl.Margin = new Padding(4);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(965, 392);
+            tabControl.Size = new Size(1229, 413);
             tabControl.TabIndex = 2;
             // 
             // employeesListTab
@@ -96,7 +100,7 @@
             employeesListTab.Margin = new Padding(4);
             employeesListTab.Name = "employeesListTab";
             employeesListTab.Padding = new Padding(4);
-            employeesListTab.Size = new Size(957, 351);
+            employeesListTab.Size = new Size(1221, 372);
             employeesListTab.TabIndex = 0;
             employeesListTab.Text = "Employees list";
             employeesListTab.UseVisualStyleBackColor = true;
@@ -139,11 +143,15 @@
             dataGridView.RowHeadersVisible = false;
             dataGridView.RowHeadersWidth = 51;
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView.Size = new Size(949, 343);
+            dataGridView.Size = new Size(1213, 364);
             dataGridView.TabIndex = 0;
             // 
             // employeeDetailTab
             // 
+            employeeDetailTab.Controls.Add(labelComboCity);
+            employeeDetailTab.Controls.Add(comboBoxCity);
+            employeeDetailTab.Controls.Add(labelComboCountry);
+            employeeDetailTab.Controls.Add(comboBoxCountry);
             employeeDetailTab.Controls.Add(txtApartmentNumber);
             employeeDetailTab.Controls.Add(labelApartmentNumber);
             employeeDetailTab.Controls.Add(txtFloorNumber);
@@ -168,18 +176,56 @@
             employeeDetailTab.Controls.Add(lastNameLabel);
             employeeDetailTab.Controls.Add(firstNameLabel);
             employeeDetailTab.Controls.Add(idLabel);
-            employeeDetailTab.Location = new Point(4, 29);
+            employeeDetailTab.Location = new Point(4, 37);
             employeeDetailTab.Margin = new Padding(4);
             employeeDetailTab.Name = "employeeDetailTab";
             employeeDetailTab.Padding = new Padding(4);
-            employeeDetailTab.Size = new Size(1429, 509);
+            employeeDetailTab.Size = new Size(1221, 372);
             employeeDetailTab.TabIndex = 1;
             employeeDetailTab.Text = "Employee detail";
             employeeDetailTab.UseVisualStyleBackColor = true;
             // 
+            // labelComboCity
+            // 
+            labelComboCity.AutoSize = true;
+            labelComboCity.Location = new Point(368, 114);
+            labelComboCity.Margin = new Padding(4, 0, 4, 0);
+            labelComboCity.Name = "labelComboCity";
+            labelComboCity.Size = new Size(46, 28);
+            labelComboCity.TabIndex = 29;
+            labelComboCity.Text = "City";
+            // 
+            // comboBoxCity
+            // 
+            comboBoxCity.FormattingEnabled = true;
+            comboBoxCity.Location = new Point(368, 146);
+            comboBoxCity.Name = "comboBoxCity";
+            comboBoxCity.Size = new Size(230, 36);
+            comboBoxCity.TabIndex = 28;
+            comboBoxCity.SelectedIndexChanged += comboBoxCity_SelectedIndexChanged;
+            // 
+            // labelComboCountry
+            // 
+            labelComboCountry.AutoSize = true;
+            labelComboCountry.Location = new Point(100, 114);
+            labelComboCountry.Margin = new Padding(4, 0, 4, 0);
+            labelComboCountry.Name = "labelComboCountry";
+            labelComboCountry.Size = new Size(82, 28);
+            labelComboCountry.TabIndex = 27;
+            labelComboCountry.Text = "Country";
+            // 
+            // comboBoxCountry
+            // 
+            comboBoxCountry.FormattingEnabled = true;
+            comboBoxCountry.Location = new Point(100, 146);
+            comboBoxCountry.Name = "comboBoxCountry";
+            comboBoxCountry.Size = new Size(230, 36);
+            comboBoxCountry.TabIndex = 26;
+            comboBoxCountry.SelectedIndexChanged += comboBoxCountry_SelectedIndexChanged;            
+            // 
             // txtApartmentNumber
             // 
-            txtApartmentNumber.Location = new Point(918, 323);
+            txtApartmentNumber.Location = new Point(856, 231);
             txtApartmentNumber.Margin = new Padding(4);
             txtApartmentNumber.Name = "txtApartmentNumber";
             txtApartmentNumber.Size = new Size(230, 34);
@@ -188,7 +234,7 @@
             // labelApartmentNumber
             // 
             labelApartmentNumber.AutoSize = true;
-            labelApartmentNumber.Location = new Point(918, 291);
+            labelApartmentNumber.Location = new Point(856, 199);
             labelApartmentNumber.Margin = new Padding(4, 0, 4, 0);
             labelApartmentNumber.Name = "labelApartmentNumber";
             labelApartmentNumber.Size = new Size(183, 28);
@@ -197,7 +243,7 @@
             // 
             // txtFloorNumber
             // 
-            txtFloorNumber.Location = new Point(918, 241);
+            txtFloorNumber.Location = new Point(614, 231);
             txtFloorNumber.Margin = new Padding(4);
             txtFloorNumber.Name = "txtFloorNumber";
             txtFloorNumber.Size = new Size(230, 34);
@@ -206,7 +252,7 @@
             // labelFloorNumber
             // 
             labelFloorNumber.AutoSize = true;
-            labelFloorNumber.Location = new Point(918, 209);
+            labelFloorNumber.Location = new Point(614, 199);
             labelFloorNumber.Margin = new Padding(4, 0, 4, 0);
             labelFloorNumber.Name = "labelFloorNumber";
             labelFloorNumber.Size = new Size(135, 28);
@@ -215,7 +261,7 @@
             // 
             // txtHouseNumber
             // 
-            txtHouseNumber.Location = new Point(918, 156);
+            txtHouseNumber.Location = new Point(856, 146);
             txtHouseNumber.Margin = new Padding(4);
             txtHouseNumber.Name = "txtHouseNumber";
             txtHouseNumber.Size = new Size(230, 34);
@@ -224,7 +270,7 @@
             // labelHouseNumber
             // 
             labelHouseNumber.AutoSize = true;
-            labelHouseNumber.Location = new Point(918, 124);
+            labelHouseNumber.Location = new Point(856, 114);
             labelHouseNumber.Margin = new Padding(4, 0, 4, 0);
             labelHouseNumber.Name = "labelHouseNumber";
             labelHouseNumber.Size = new Size(144, 28);
@@ -233,7 +279,7 @@
             // 
             // txtStreetName
             // 
-            txtStreetName.Location = new Point(664, 323);
+            txtStreetName.Location = new Point(614, 146);
             txtStreetName.Margin = new Padding(4);
             txtStreetName.Name = "txtStreetName";
             txtStreetName.Size = new Size(230, 34);
@@ -242,7 +288,7 @@
             // labelStreet
             // 
             labelStreet.AutoSize = true;
-            labelStreet.Location = new Point(664, 291);
+            labelStreet.Location = new Point(614, 114);
             labelStreet.Margin = new Padding(4, 0, 4, 0);
             labelStreet.Name = "labelStreet";
             labelStreet.Size = new Size(63, 28);
@@ -251,44 +297,48 @@
             // 
             // txtCityName
             // 
-            txtCityName.Location = new Point(664, 241);
+            txtCityName.Location = new Point(368, 231);
             txtCityName.Margin = new Padding(4);
             txtCityName.Name = "txtCityName";
             txtCityName.Size = new Size(230, 34);
             txtCityName.TabIndex = 17;
+            txtCityName.Visible = false;
             // 
             // labelCity
             // 
             labelCity.AutoSize = true;
-            labelCity.Location = new Point(664, 209);
+            labelCity.Location = new Point(368, 199);
             labelCity.Margin = new Padding(4, 0, 4, 0);
             labelCity.Name = "labelCity";
-            labelCity.Size = new Size(46, 28);
+            labelCity.Size = new Size(138, 28);
             labelCity.TabIndex = 16;
-            labelCity.Text = "City";
+            labelCity.Text = "Enter your city";
+            labelCity.Visible = false;
             // 
             // txtCountryName
             // 
-            txtCountryName.Location = new Point(664, 156);
+            txtCountryName.Location = new Point(100, 231);
             txtCountryName.Margin = new Padding(4);
             txtCountryName.Name = "txtCountryName";
             txtCountryName.Size = new Size(230, 34);
             txtCountryName.TabIndex = 15;
+            txtCountryName.Visible = false;
             // 
             // labelCountry
             // 
             labelCountry.AutoSize = true;
-            labelCountry.Location = new Point(664, 124);
+            labelCountry.Location = new Point(100, 199);
             labelCountry.Margin = new Padding(4, 0, 4, 0);
             labelCountry.Name = "labelCountry";
-            labelCountry.Size = new Size(82, 28);
+            labelCountry.Size = new Size(174, 28);
             labelCountry.TabIndex = 14;
-            labelCountry.Text = "Country";
+            labelCountry.Text = "Enter your country";
+            labelCountry.Visible = false;
             // 
             // txtSalary
             // 
             txtSalary.DecimalPlaces = 2;
-            txtSalary.Location = new Point(352, 274);
+            txtSalary.Location = new Point(614, 313);
             txtSalary.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             txtSalary.Name = "txtSalary";
             txtSalary.Size = new Size(150, 34);
@@ -296,25 +346,25 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(245, 348);
+            btnCancel.Location = new Point(815, 305);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(144, 39);
+            btnCancel.Size = new Size(123, 39);
             btnCancel.TabIndex = 12;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(66, 348);
+            btnSave.Location = new Point(963, 305);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(144, 39);
+            btnSave.Size = new Size(123, 39);
             btnSave.TabIndex = 11;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
             // 
             // txtPosition
             // 
-            txtPosition.Location = new Point(67, 274);
+            txtPosition.Location = new Point(856, 62);
             txtPosition.Margin = new Padding(4);
             txtPosition.Name = "txtPosition";
             txtPosition.Size = new Size(230, 34);
@@ -322,7 +372,7 @@
             // 
             // txtLastName
             // 
-            txtLastName.Location = new Point(352, 156);
+            txtLastName.Location = new Point(614, 62);
             txtLastName.Margin = new Padding(4);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new Size(230, 34);
@@ -330,7 +380,7 @@
             // 
             // txtFirstName
             // 
-            txtFirstName.Location = new Point(67, 156);
+            txtFirstName.Location = new Point(368, 62);
             txtFirstName.Margin = new Padding(4);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new Size(230, 34);
@@ -338,7 +388,7 @@
             // 
             // txtId
             // 
-            txtId.Location = new Point(67, 59);
+            txtId.Location = new Point(100, 62);
             txtId.Margin = new Padding(4);
             txtId.Name = "txtId";
             txtId.ReadOnly = true;
@@ -349,7 +399,7 @@
             // salaryLabel
             // 
             salaryLabel.AutoSize = true;
-            salaryLabel.Location = new Point(352, 241);
+            salaryLabel.Location = new Point(614, 282);
             salaryLabel.Margin = new Padding(4, 0, 4, 0);
             salaryLabel.Name = "salaryLabel";
             salaryLabel.Size = new Size(65, 28);
@@ -360,7 +410,7 @@
             // positionLabel
             // 
             positionLabel.AutoSize = true;
-            positionLabel.Location = new Point(67, 241);
+            positionLabel.Location = new Point(856, 29);
             positionLabel.Margin = new Padding(4, 0, 4, 0);
             positionLabel.Name = "positionLabel";
             positionLabel.Size = new Size(82, 28);
@@ -370,7 +420,7 @@
             // lastNameLabel
             // 
             lastNameLabel.AutoSize = true;
-            lastNameLabel.Location = new Point(352, 124);
+            lastNameLabel.Location = new Point(614, 30);
             lastNameLabel.Margin = new Padding(4, 0, 4, 0);
             lastNameLabel.Name = "lastNameLabel";
             lastNameLabel.Size = new Size(103, 28);
@@ -380,7 +430,7 @@
             // firstNameLabel
             // 
             firstNameLabel.AutoSize = true;
-            firstNameLabel.Location = new Point(67, 124);
+            firstNameLabel.Location = new Point(368, 30);
             firstNameLabel.Margin = new Padding(4, 0, 4, 0);
             firstNameLabel.Name = "firstNameLabel";
             firstNameLabel.Size = new Size(106, 28);
@@ -390,7 +440,7 @@
             // idLabel
             // 
             idLabel.AutoSize = true;
-            idLabel.Location = new Point(67, 27);
+            idLabel.Location = new Point(100, 30);
             idLabel.Margin = new Padding(4, 0, 4, 0);
             idLabel.Name = "idLabel";
             idLabel.Size = new Size(29, 28);
@@ -405,7 +455,7 @@
             mainMenu.Location = new Point(0, 0);
             mainMenu.Name = "mainMenu";
             mainMenu.Padding = new Padding(8, 3, 0, 3);
-            mainMenu.Size = new Size(965, 30);
+            mainMenu.Size = new Size(1229, 30);
             mainMenu.TabIndex = 1;
             // 
             // fileToolStripMenuItem
@@ -460,14 +510,14 @@
             panel.Location = new Point(0, 0);
             panel.Margin = new Padding(4);
             panel.Name = "panel";
-            panel.Size = new Size(965, 31);
+            panel.Size = new Size(1229, 31);
             panel.TabIndex = 1;
             // 
             // EmployeeView
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(965, 423);
+            ClientSize = new Size(1229, 444);
             Controls.Add(tabControl);
             Controls.Add(panel);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -526,5 +576,9 @@
         private Label labelFloorNumber;
         private TextBox txtHouseNumber;
         private Label labelHouseNumber;
+        private Label labelComboCity;
+        private ComboBox comboBoxCity;
+        private Label labelComboCountry;
+        private ComboBox comboBoxCountry;
     }
 }

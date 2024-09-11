@@ -97,6 +97,47 @@ namespace CompanyDB._Repositories
                 }
                 return employeeList;
             }            
+        }
+       
+        public async Task<IEnumerable<string>> GetAllCountries()
+        {
+            var countryList = new List<string>();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("SELECT CountryName FROM Countries", connection))
+            {
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string countryName = reader["CountryName"].ToString();
+                        countryList.Add(countryName);
+                    }
+                }
+            }
+            countryList.Add("Other");
+            return countryList;
+        }
+
+        public async Task<IEnumerable<string>> GetCitiesByCountryName(string countryName)
+        {
+            var cityList = new List<string>();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("SELECT Cities.CityName FROM Cities INNER JOIN Countries ON Cities.CountryId = Countries.CountryId WHERE Countries.CountryName = @CountryName;", connection))
+            {
+                command.Parameters.AddWithValue("@CountryName", countryName);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string cityName = reader["CityName"].ToString();
+                        cityList.Add(cityName);
+                    }
+                }
+            }
+            cityList.Add("Other");
+            return cityList;
         }        
     }
 }

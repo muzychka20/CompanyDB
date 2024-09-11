@@ -46,7 +46,7 @@
             panelMenu.Location = new Point(0, 0);
             panelMenu.Margin = new Padding(4);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(150, 573);
+            panelMenu.Size = new Size(155, 493);
             panelMenu.TabIndex = 0;
             // 
             // panel1
@@ -56,7 +56,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(150, 486);
+            panel1.Size = new Size(155, 427);
             panel1.TabIndex = 2;
             // 
             // label1
@@ -79,7 +79,7 @@
             btnEmployees.Location = new Point(4, 41);
             btnEmployees.Margin = new Padding(4);
             btnEmployees.Name = "btnEmployees";
-            btnEmployees.Size = new Size(142, 43);
+            btnEmployees.Size = new Size(147, 43);
             btnEmployees.TabIndex = 0;
             btnEmployees.Text = "Employees";
             btnEmployees.UseVisualStyleBackColor = true;
@@ -96,10 +96,10 @@
             btnExit.FlatStyle = FlatStyle.Flat;
             btnExit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnExit.ForeColor = SystemColors.Control;
-            btnExit.Location = new Point(0, 532);
+            btnExit.Location = new Point(0, 449);
             btnExit.Margin = new Padding(4);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(150, 41);
+            btnExit.Size = new Size(155, 44);
             btnExit.TabIndex = 1;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = false;
@@ -110,12 +110,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Snow;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(1437, 573);
+            ClientSize = new Size(1342, 493);
             Controls.Add(panelMenu);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             IsMdiContainer = true;
             Margin = new Padding(4);
-            MinimumSize = new Size(1455, 620);
+            MinimumSize = new Size(1360, 540);
             Name = "MainView";
             Text = "Main";
             panelMenu.ResumeLayout(false);

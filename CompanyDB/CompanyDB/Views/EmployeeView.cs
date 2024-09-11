@@ -1,31 +1,35 @@
-﻿namespace CompanyDB.Views
+﻿using System.Windows.Forms;
+
+namespace CompanyDB.Views
 {
     public partial class EmployeeView : Form, IEmployeeView
     {
         // Fields      
         private string message;
         private bool isSuccessful;
-        private bool isEdit;        
+        private bool isEdit;
 
         // Constructor
         public EmployeeView()
         {
             InitializeComponent();
             AssociateAndRaiseViewEvents();
-            tabControl.TabPages.Remove(employeeDetailTab);          
-            this.Load += delegate { ShowAllEvent?.Invoke(this, EventArgs.Empty); };                                                        
+            tabControl.TabPages.Remove(employeeDetailTab);
         }
 
         private void AssociateAndRaiseViewEvents()
         {
+            // Load
+            this.Load += delegate { ShowAllEvent?.Invoke(this, EventArgs.Empty); };
+
             // Exit
             exitToolStripMenuItem.Click += delegate { this.Close(); };
 
             // Get all
             getAllToolStripMenuItem.Click += delegate { ShowAllEvent?.Invoke(this, EventArgs.Empty); };
-            
+
             // Add new
-            newToolStripMenuItem.Click += delegate 
+            newToolStripMenuItem.Click += delegate
             {
                 employeeToolStripMenuItem.Enabled = false;
                 AddNewEvent?.Invoke(this, EventArgs.Empty);
@@ -35,7 +39,8 @@
             };
 
             // Edit
-            editToolStripMenuItem.Click += delegate {
+            editToolStripMenuItem.Click += delegate
+            {
                 employeeToolStripMenuItem.Enabled = false;
                 EditEvent?.Invoke(this, EventArgs.Empty);
                 tabControl.TabPages.Remove(employeesListTab);
@@ -44,8 +49,9 @@
             };
 
             // Delete
-            deleteToolStripMenuItem.Click += delegate {             
-                var result = MessageBox.Show("Are you sure you want to delete the selected employee?", "Warning", 
+            deleteToolStripMenuItem.Click += delegate
+            {
+                var result = MessageBox.Show("Are you sure you want to delete the selected employee?", "Warning",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
@@ -55,7 +61,7 @@
             };
 
             // Cancel
-            btnCancel.Click += delegate 
+            btnCancel.Click += delegate
             {
                 tabControl.TabPages.Remove(employeeDetailTab);
                 tabControl.TabPages.Add(employeesListTab);
@@ -64,41 +70,41 @@
             };
 
             // Save changes
-            btnSave.Click += delegate 
-            { 
+            btnSave.Click += delegate
+            {
                 SaveEvent?.Invoke(this, EventArgs.Empty);
                 if (isSuccessful)
                 {
                     tabControl.TabPages.Remove(employeeDetailTab);
-                    tabControl.TabPages.Add(employeesListTab);                    
+                    tabControl.TabPages.Add(employeesListTab);
                     employeeToolStripMenuItem.Enabled = true;
                 }
                 MessageBox.Show(Message);
-            };
+            };            
         }
 
         // Properties
-        public string Id 
-        { 
+        public string Id
+        {
             get => txtId.Text;
             set => txtId.Text = value.ToString();
         }
-        public string FirstName 
+        public string FirstName
         {
             get => txtFirstName.Text;
             set => txtFirstName.Text = value;
         }
-        public string LastName 
+        public string LastName
         {
             get => txtLastName.Text;
             set => txtLastName.Text = value;
         }
-        public string Position 
+        public string Position
         {
             get => txtPosition.Text;
             set => txtPosition.Text = value;
         }
-        public string Salary 
+        public string Salary
         {
             get => txtSalary.Text;
             set => txtSalary.Text = value.ToString();
@@ -106,14 +112,41 @@
 
         public string CountryName
         {
-            get => txtCountryName.Text;
-            set => txtCountryName.Text = value;
+            get
+            {
+                if (comboBoxCountry.SelectedItem?.ToString() == "Other")
+                {
+                    return txtCountryName.Text;
+                }
+                return comboBoxCountry.SelectedItem?.ToString();
+            }
+            set
+            {
+                if (comboBoxCountry.SelectedItem?.ToString() == "Other")
+                {
+                    comboBoxCountry.SelectedItem = txtCountryName.Text;
+                }
+                else
+                {
+                    comboBoxCountry.SelectedItem = value;
+                }
+            }
         }
 
         public string CityName
         {
-            get => txtCityName.Text;
-            set => txtCityName.Text = value;
+            get
+            {
+                if (comboBoxCity.SelectedItem?.ToString() == "Other" || comboBoxCountry.SelectedItem?.ToString() == "Other")
+                {
+                    return txtCityName.Text;
+                }
+                return comboBoxCity.SelectedItem?.ToString();
+            }
+            set
+            {
+                comboBoxCity.SelectedItem = value;
+            }
         }
 
         public string StreetName
@@ -139,7 +172,7 @@
             set => txtApartmentNumber.Text = value;
         }
 
-        public bool IsEdit 
+        public bool IsEdit
         {
             get => isEdit;
             set => isEdit = value;
@@ -153,7 +186,18 @@
         {
             get => message;
             set => message = value;
-        }        
+        }
+        ComboBox IEmployeeView.CountryNameComboBox
+        {
+            get => comboBoxCountry;
+            set => comboBoxCountry = value;
+        }
+
+        ComboBox IEmployeeView.CityNameComboBox
+        {
+            get => comboBoxCity;
+            set => comboBoxCity = value;
+        }
 
         // Events        
         public event EventHandler ShowAllEvent;
@@ -161,12 +205,58 @@
         public event EventHandler EditEvent;
         public event EventHandler DeleteEvent;
         public event EventHandler SaveEvent;
-        public event EventHandler CancelEvent;
+        public event EventHandler CancelEvent;        
+        public event Action OnChangeCountry;
 
         // Methods
         public void SetEmployeeListBindingSource(BindingSource employeeList)
         {
             dataGridView.DataSource = employeeList;
+        }
+
+        private void comboBoxCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxCountry.SelectedItem != null)
+            {
+                if (comboBoxCountry.SelectedItem.ToString() == "Other")
+                {
+                    txtCountryName.Visible = true;
+                    txtCountryName.Text = string.Empty;
+                    labelCountry.Visible = true;
+                    labelComboCity.Visible = false;
+                    comboBoxCity.DataSource = null;
+                    comboBoxCity.Visible = false;
+                    labelCity.Visible = true;
+                    txtCityName.Visible = true;
+                }
+                else
+                {
+                    txtCountryName.Visible = false;
+                    labelCountry.Visible = false;
+                    labelComboCity.Visible = true;
+                    comboBoxCity.Visible = true;
+                    labelCity.Visible = false;
+                    txtCityName.Visible = false;
+                    OnChangeCountry?.Invoke();
+                }
+            }
+        }
+
+        private void comboBoxCity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxCity.SelectedItem != null)
+            {
+                if (comboBoxCity.SelectedItem.ToString() == "Other")
+                {
+                    labelCity.Visible = true;
+                    txtCityName.Visible = true;
+                }
+                else
+                {
+                    labelCity.Visible = false;
+                    txtCityName.Visible = false;
+                }
+            }
         }
 
         // Singleton pattern (Open a single form instance)
@@ -189,6 +279,6 @@
                 instance.BringToFront();
             }
             return instance;
-        }
+        }       
     }
 }
