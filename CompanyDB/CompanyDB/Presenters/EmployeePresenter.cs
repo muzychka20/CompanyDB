@@ -129,6 +129,8 @@ namespace CompanyDB.Presenters
             view.CityNameComboBox.Items.Clear();
             view.CityNameComboBox.SelectedIndex = -1;
             view.CityNameComboBox.SelectedItem = null;
+            view.CountryNameComboBox.Text = string.Empty;
+            view.CityNameComboBox.Text = string.Empty;
         }
 
         private void DeleteSelectedEmployee(object? sender, EventArgs e)
