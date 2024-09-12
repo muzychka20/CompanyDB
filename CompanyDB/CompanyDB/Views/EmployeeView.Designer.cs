@@ -201,8 +201,7 @@
             comboBoxCity.Location = new Point(368, 146);
             comboBoxCity.Name = "comboBoxCity";
             comboBoxCity.Size = new Size(230, 36);
-            comboBoxCity.TabIndex = 28;
-            comboBoxCity.SelectedIndexChanged += comboBoxCity_SelectedIndexChanged;
+            comboBoxCity.TabIndex = 28;            
             // 
             // labelComboCountry
             // 
@@ -220,8 +219,7 @@
             comboBoxCountry.Location = new Point(100, 146);
             comboBoxCountry.Name = "comboBoxCountry";
             comboBoxCountry.Size = new Size(230, 36);
-            comboBoxCountry.TabIndex = 26;
-            comboBoxCountry.SelectedIndexChanged += comboBoxCountry_SelectedIndexChanged;            
+            comboBoxCountry.TabIndex = 26;            
             // 
             // txtApartmentNumber
             // 

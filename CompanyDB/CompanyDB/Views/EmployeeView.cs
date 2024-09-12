@@ -80,7 +80,54 @@ namespace CompanyDB.Views
                     employeeToolStripMenuItem.Enabled = true;
                 }
                 MessageBox.Show(Message);
-            };            
+            };
+
+            // Select country
+            comboBoxCountry.SelectedIndexChanged += delegate
+            {
+                if (comboBoxCountry.SelectedItem != null)
+                {
+                    if (comboBoxCountry.SelectedItem.ToString() == "Other")
+                    {
+                        txtCountryName.Visible = true;
+                        txtCountryName.Text = string.Empty;
+                        labelCountry.Visible = true;
+                        labelComboCity.Visible = false;
+                        comboBoxCity.DataSource = null;
+                        comboBoxCity.Visible = false;
+                        labelCity.Visible = true;
+                        txtCityName.Visible = true;
+                    }
+                    else
+                    {
+                        txtCountryName.Visible = false;
+                        labelCountry.Visible = false;
+                        labelComboCity.Visible = true;
+                        comboBoxCity.Visible = true;
+                        labelCity.Visible = false;
+                        txtCityName.Visible = false;                        
+                        OnChangeCountry?.Invoke();
+                    }
+                }
+            };
+
+            // Select city
+            comboBoxCity.SelectedIndexChanged += delegate
+            {
+                if (comboBoxCity.SelectedItem != null)
+                {
+                    if (comboBoxCity.SelectedItem.ToString() == "Other")
+                    {
+                        labelCity.Visible = true;
+                        txtCityName.Visible = true;
+                    }
+                    else
+                    {
+                        labelCity.Visible = false;
+                        txtCityName.Visible = false;
+                    }
+                }
+            };
         }
 
         // Properties
@@ -212,52 +259,7 @@ namespace CompanyDB.Views
         public void SetEmployeeListBindingSource(BindingSource employeeList)
         {
             dataGridView.DataSource = employeeList;
-        }
-
-        private void comboBoxCountry_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBoxCountry.SelectedItem != null)
-            {
-                if (comboBoxCountry.SelectedItem.ToString() == "Other")
-                {
-                    txtCountryName.Visible = true;
-                    txtCountryName.Text = string.Empty;
-                    labelCountry.Visible = true;
-                    labelComboCity.Visible = false;
-                    comboBoxCity.DataSource = null;
-                    comboBoxCity.Visible = false;
-                    labelCity.Visible = true;
-                    txtCityName.Visible = true;
-                }
-                else
-                {
-                    txtCountryName.Visible = false;
-                    labelCountry.Visible = false;
-                    labelComboCity.Visible = true;
-                    comboBoxCity.Visible = true;
-                    labelCity.Visible = false;
-                    txtCityName.Visible = false;
-                    OnChangeCountry?.Invoke();
-                }
-            }
-        }
-
-        private void comboBoxCity_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBoxCity.SelectedItem != null)
-            {
-                if (comboBoxCity.SelectedItem.ToString() == "Other")
-                {
-                    labelCity.Visible = true;
-                    txtCityName.Visible = true;
-                }
-                else
-                {
-                    labelCity.Visible = false;
-                    txtCityName.Visible = false;
-                }
-            }
-        }
+        }        
 
         // Singleton pattern (Open a single form instance)
         private static EmployeeView instance;
