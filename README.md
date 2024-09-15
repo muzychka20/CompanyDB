@@ -19,6 +19,6 @@ This Employee Management System allows for easy management of employees, includi
 - **C# / .NET Framework**: The main language used for building the Windows Forms application.
 - **WinForms**: For building the graphical user interface.
 - **MVP Pattern**: Ensures a clear separation of concerns between the UI and business logic.
-- **SQL**: Database connectivity for retrieving and storing employee, country, and city data.
+- **SQL**: Database connectivity for retrieving and storing employee's data.
 
 ![Add Other](docs/add2.png)

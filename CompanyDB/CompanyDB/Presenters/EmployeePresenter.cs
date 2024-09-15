@@ -157,9 +157,7 @@ namespace CompanyDB.Presenters
             {
                 int selectedCountryId = selectedCountry.CountryID;
                 view.CountryName = selectedCountry.CountryName;
-                await LoadCities(selectedCountryId);
-                ClearComboBoxSelection(view.CityNameComboBox);
-                view.CityName = string.Empty;
+                await LoadCities(selectedCountryId);                
             }
         }
 
@@ -173,9 +171,7 @@ namespace CompanyDB.Presenters
             {
                 int selectedCityId = selectedCity.CityID;
                 view.CityName = selectedCity.CityName;
-                await LoadStreets(selectedCityId);
-                ClearComboBoxSelection(view.StreetNameComboBox);
-                view.StreetName = string.Empty;
+                await LoadStreets(selectedCityId);               
             }
         }
 
@@ -189,9 +185,7 @@ namespace CompanyDB.Presenters
             {
                 int selectedStreetId = selectedStreet.StreetID;
                 view.StreetName = selectedStreet.StreetName;
-                await LoadHouses(selectedStreetId);
-                ClearComboBoxSelection(view.HouseComboBox);
-                view.HouseNumber = string.Empty;
+                await LoadHouses(selectedStreetId);                
             }
         }
 
@@ -205,9 +199,7 @@ namespace CompanyDB.Presenters
             {
                 int selectedHouseId = selectedHouse.HouseID;
                 view.HouseNumber = selectedHouse.HouseNumber;
-                await LoadApartments(selectedHouseId);
-                ClearComboBoxSelection(view.ApartmentComboBox);
-                view.ApartmentNumber = string.Empty;
+                await LoadApartments(selectedHouseId);                
             }
         }
 
@@ -328,8 +320,11 @@ namespace CompanyDB.Presenters
         // Set the selection for ComboBox
         private void SetComboBoxSelection(ComboBox comboBox, object selectedValue, string displayText)
         {
-            comboBox.SelectedValue = selectedValue;
-            comboBox.Text = displayText;
+            if (comboBox.DataSource != null)
+            {                
+                comboBox.SelectedValue = selectedValue;
+                comboBox.Text = displayText;
+            }            
         }
 
         private void DeleteSelectedEmployee(object? sender, EventArgs e)
@@ -368,12 +363,9 @@ namespace CompanyDB.Presenters
                 view.ApartmentID = employee.EmployeeApartmentID.ToString();
                 view.ApartmentNumber = employee.EmployeeApartmentNumber;
                 view.FloorNumber = employee.EmployeeFloorNumber;
+
+                await GetLocation(employee);
                 
-                var task = Task.Run(async delegate
-                {
-                    await GetLocation(employee);                    
-                });
-                task.Wait();
 
                 if (!view.IsLoadingData)
                 {                   
@@ -394,19 +386,18 @@ namespace CompanyDB.Presenters
 
         private async Task GetLocation(EmployeeModel employee)
         {
-            await LoadCountries();
-            await LoadCities(employee.EmployeeCountryID);
-            await LoadStreets(employee.EmployeeCityID);
-            await LoadHouses(employee.EmployeeStreetID);
-            await LoadApartments(employee.EmployeeHouseID);
+            await LoadCountries();            
+            await LoadCities(employee.EmployeeCountryID);            
+            await LoadStreets(employee.EmployeeCityID);            
+            await LoadHouses(employee.EmployeeStreetID);            
+            await LoadApartments(employee.EmployeeHouseID);            
         }
 
         private async void AddNewEmployee(object? sender, EventArgs e)
         {
             view.IsEdit = false;
             await LoadCountries();
-            ClearComboBoxSelection(view.CountryNameComboBox);
-            view.CountryName = string.Empty;
+            ClearComboBoxSelection(view.CountryNameComboBox);            
         }
     }
 }
