@@ -15,7 +15,12 @@ BEGIN
         Streets.StreetName AS 'Street',
         Houses.HouseNumber AS 'House',
         Apartments.FloorNumber AS 'Floor',        
-        Apartments.ApartmentNumber AS 'Apartment'
+        Apartments.ApartmentNumber AS 'Apartment',
+        Countries.CountryId AS 'CountryId',
+		Cities.CityId AS 'CityId',
+		Streets.StreetId AS 'StreetId',
+		Houses.HouseId AS 'HouseId',
+		Apartments.ApartmentId AS 'ApartmentId'
     FROM Employees
     JOIN Apartments ON Apartments.ApartmentId = Employees.Location
     JOIN Houses ON Houses.HouseId = Apartments.HouseId
