@@ -65,6 +65,7 @@
         bool IsEdit { get; set; }
         bool IsSuccessful { get; set; }
         string Message { get; set; }
+        bool IsLoadingData { get; set; }
 
         // Events        
         event EventHandler ShowAllEvent;

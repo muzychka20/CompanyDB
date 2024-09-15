@@ -16,8 +16,7 @@ namespace CompanyDB.Presenters
         private IHouseRepository houseRepository;
         private IApartmentRepository apartmentRepository;
         private BindingSource employeeBindingSource;
-        private IEnumerable<EmployeeModel> employeeList;        
-        private bool isLoadingData = false;
+        private IEnumerable<EmployeeModel> employeeList;                
 
         // Constructor
         public EmployeePresenter(IEmployeeView view,
@@ -66,7 +65,7 @@ namespace CompanyDB.Presenters
         {
             try
             {
-                isLoadingData = true;
+                view.IsLoadingData = true;
 
                 IEnumerable<CountryModel> countries = await countryRepository.GetAllCountries();
                 view.CountryNameComboBox.DataSource = countries;
@@ -78,7 +77,7 @@ namespace CompanyDB.Presenters
             }
             finally
             {
-                isLoadingData = false;
+                view.IsLoadingData = false;
             }
         }
 
@@ -87,7 +86,7 @@ namespace CompanyDB.Presenters
         {            
             try
             {
-                isLoadingData = true;
+                view.IsLoadingData = true;
 
                 IEnumerable<CityModel> cities = await cityRepository.GetCitiesByCountryId(countryId);
                 view.CityNameComboBox.DataSource = cities;
@@ -99,7 +98,7 @@ namespace CompanyDB.Presenters
             }
             finally
             {
-                isLoadingData = false;
+                view.IsLoadingData = false;
             }
         }
 
@@ -109,7 +108,7 @@ namespace CompanyDB.Presenters
            
             try
             {
-                isLoadingData = true;
+                view.IsLoadingData = true;
 
                 IEnumerable<StreetModel> streets = await streetRepository.GetStreetsByCityId(cityId);
                 view.StreetNameComboBox.DataSource = streets;
@@ -121,7 +120,7 @@ namespace CompanyDB.Presenters
             }
             finally
             {
-                isLoadingData = false;
+                view.IsLoadingData = false;
             }
         }
 
@@ -131,7 +130,7 @@ namespace CompanyDB.Presenters
         {            
             try
             {
-                isLoadingData = true;
+                view.IsLoadingData = true;
 
                 IEnumerable<HouseModel> houses = await houseRepository.GetHousesByStreetId(streetId);
                 view.HouseComboBox.DataSource = houses;
@@ -144,7 +143,7 @@ namespace CompanyDB.Presenters
             }
             finally
             {
-                isLoadingData = false;
+                view.IsLoadingData = false;
             }
         }
 
@@ -153,7 +152,7 @@ namespace CompanyDB.Presenters
         {
             try
             {
-                isLoadingData = true;
+                view.IsLoadingData = true;
 
                 IEnumerable<ApartmentModel> apartments = await apartmentRepository.GetApartmentsByHouseId(houseId);
                 view.ApartmentComboBox.DataSource = apartments;
@@ -165,14 +164,14 @@ namespace CompanyDB.Presenters
             }
             finally
             {
-                isLoadingData = false;
+                view.IsLoadingData = false;
             }
         }
 
         // Handle country change
         private async void OnChangeCountry()
         {            
-            if (isLoadingData)
+            if (view.IsLoadingData)
                 return;
 
             if (view.CountryNameComboBox.SelectedItem is CountryModel selectedCountry)
@@ -186,7 +185,7 @@ namespace CompanyDB.Presenters
         // Handle city change
         private async void OnChangeCity()
         {
-            if (isLoadingData)
+            if (view.IsLoadingData)
                 return;
 
             if (view.CityNameComboBox.SelectedItem is CityModel selectedCity)
@@ -200,7 +199,7 @@ namespace CompanyDB.Presenters
         // Handle street change
         private async void OnChangeStreet()
         {
-            if (isLoadingData)
+            if (view.IsLoadingData)
                 return;
 
             if (view.StreetNameComboBox.SelectedItem is StreetModel selectedStreet)
@@ -214,7 +213,7 @@ namespace CompanyDB.Presenters
         // Handle house change
         private async void OnChangeHouse()
         {
-            if (isLoadingData)
+            if (view.IsLoadingData)
                 return;
 
             if (view.HouseComboBox.SelectedItem is HouseModel selectedHouse)
@@ -228,7 +227,7 @@ namespace CompanyDB.Presenters
         // Handle apartment change
         private void OnChangeApartment()
         {
-            if (isLoadingData)
+            if (view.IsLoadingData)
                 return;
 
             if (view.ApartmentComboBox.SelectedItem is ApartmentModel selectedApartment)

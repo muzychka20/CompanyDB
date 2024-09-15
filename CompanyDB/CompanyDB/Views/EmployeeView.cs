@@ -8,6 +8,7 @@ namespace CompanyDB.Views
         private string message;
         private bool isSuccessful;
         private bool isEdit;
+        private bool isLoadingData;
 
         // Constructor
         public EmployeeView()
@@ -240,6 +241,11 @@ namespace CompanyDB.Views
         {
             get => message;
             set => message = value;
+        }
+        public bool IsLoadingData 
+        {
+            get => isLoadingData;
+            set => isLoadingData = value;
         }
 
         // Events        
