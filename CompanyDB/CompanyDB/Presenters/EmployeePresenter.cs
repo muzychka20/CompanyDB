@@ -44,7 +44,7 @@ namespace CompanyDB.Presenters
             this.view.OnChangeCity += OnChangeCity;
             this.view.OnChangeStreet += OnChangeStreet;
             this.view.OnChangeHouse += OnChangeHouse;
-            this.view.OnChangeApartment += OnChangeApartment;
+            this.view.OnChangeApartment += OnChangeApartment;            
 
             // Set employees binding source
             this.view.SetEmployeeListBindingSource(employeeBindingSource);
@@ -58,7 +58,7 @@ namespace CompanyDB.Presenters
         {
             employeeList = employeeRepository.GetAllEmployees();
             employeeBindingSource.DataSource = employeeList; // Set data source           
-        }
+        }        
 
         // Load countries
         private async Task LoadCountries()
@@ -66,14 +66,10 @@ namespace CompanyDB.Presenters
             try
             {
                 view.IsLoadingData = true;
-
                 IEnumerable<CountryModel> countries = await countryRepository.GetAllCountries();
                 view.CountryNameComboBox.DataSource = countries;
                 view.CountryNameComboBox.DisplayMember = "CountryName";
-                view.CountryNameComboBox.ValueMember = "CountryID";
-                
-                ClearComboBoxSelection(view.CountryNameComboBox);                
-                view.CountryName = string.Empty;
+                view.CountryNameComboBox.ValueMember = "CountryID";                                
             }
             finally
             {
@@ -87,14 +83,10 @@ namespace CompanyDB.Presenters
             try
             {
                 view.IsLoadingData = true;
-
                 IEnumerable<CityModel> cities = await cityRepository.GetCitiesByCountryId(countryId);
                 view.CityNameComboBox.DataSource = cities;
                 view.CityNameComboBox.DisplayMember = "CityName";
                 view.CityNameComboBox.ValueMember = "CityID";
-
-                ClearComboBoxSelection(view.CityNameComboBox);
-                view.CityName = string.Empty;
             }
             finally
             {
@@ -109,14 +101,10 @@ namespace CompanyDB.Presenters
             try
             {
                 view.IsLoadingData = true;
-
                 IEnumerable<StreetModel> streets = await streetRepository.GetStreetsByCityId(cityId);
                 view.StreetNameComboBox.DataSource = streets;
                 view.StreetNameComboBox.DisplayMember = "StreetName";
-                view.StreetNameComboBox.ValueMember = "StreetID";
-                
-                ClearComboBoxSelection(view.StreetNameComboBox);                
-                view.StreetName = string.Empty;               
+                view.StreetNameComboBox.ValueMember = "StreetID";                             
             }
             finally
             {
@@ -131,15 +119,10 @@ namespace CompanyDB.Presenters
             try
             {
                 view.IsLoadingData = true;
-
                 IEnumerable<HouseModel> houses = await houseRepository.GetHousesByStreetId(streetId);
                 view.HouseComboBox.DataSource = houses;
                 view.HouseComboBox.DisplayMember = "HouseNumber";
-                view.HouseComboBox.ValueMember = "HouseID";
-                
-                
-                ClearComboBoxSelection(view.HouseComboBox);
-                view.HouseNumber = string.Empty;                
+                view.HouseComboBox.ValueMember = "HouseID";                                                              
             }
             finally
             {
@@ -153,14 +136,10 @@ namespace CompanyDB.Presenters
             try
             {
                 view.IsLoadingData = true;
-
                 IEnumerable<ApartmentModel> apartments = await apartmentRepository.GetApartmentsByHouseId(houseId);
                 view.ApartmentComboBox.DataSource = apartments;
                 view.ApartmentComboBox.DisplayMember = "DisplayApartmentInfo";
-                view.ApartmentComboBox.ValueMember = "ApartmentID";
-                
-                ClearComboBoxSelection(view.ApartmentComboBox);
-                view.ApartmentNumber = string.Empty;
+                view.ApartmentComboBox.ValueMember = "ApartmentID";                              
             }
             finally
             {
@@ -179,6 +158,8 @@ namespace CompanyDB.Presenters
                 int selectedCountryId = selectedCountry.CountryID;
                 view.CountryName = selectedCountry.CountryName;
                 await LoadCities(selectedCountryId);
+                ClearComboBoxSelection(view.CityNameComboBox);
+                view.CityName = string.Empty;
             }
         }
 
@@ -193,6 +174,8 @@ namespace CompanyDB.Presenters
                 int selectedCityId = selectedCity.CityID;
                 view.CityName = selectedCity.CityName;
                 await LoadStreets(selectedCityId);
+                ClearComboBoxSelection(view.StreetNameComboBox);
+                view.StreetName = string.Empty;
             }
         }
 
@@ -207,6 +190,8 @@ namespace CompanyDB.Presenters
                 int selectedStreetId = selectedStreet.StreetID;
                 view.StreetName = selectedStreet.StreetName;
                 await LoadHouses(selectedStreetId);
+                ClearComboBoxSelection(view.HouseComboBox);
+                view.HouseNumber = string.Empty;
             }
         }
 
@@ -221,6 +206,8 @@ namespace CompanyDB.Presenters
                 int selectedHouseId = selectedHouse.HouseID;
                 view.HouseNumber = selectedHouse.HouseNumber;
                 await LoadApartments(selectedHouseId);
+                ClearComboBoxSelection(view.ApartmentComboBox);
+                view.ApartmentNumber = string.Empty;
             }
         }
 
@@ -338,6 +325,13 @@ namespace CompanyDB.Presenters
             comboBox.Text = string.Empty;            
         }
 
+        // Set the selection for ComboBox
+        private void SetComboBoxSelection(ComboBox comboBox, object selectedValue, string displayText)
+        {
+            comboBox.SelectedValue = selectedValue;
+            comboBox.Text = displayText;
+        }
+
         private void DeleteSelectedEmployee(object? sender, EventArgs e)
         {
             try
@@ -356,11 +350,9 @@ namespace CompanyDB.Presenters
         }
 
         private async void LoadSelectedEmployeeToEdit(object? sender, EventArgs e)
-        {
+        {            
             try
-            {
-                await LoadCountries();
-
+            {  
                 // Get the selected employee from the binding source
                 var employee = (EmployeeModel)employeeBindingSource.Current;
 
@@ -368,24 +360,53 @@ namespace CompanyDB.Presenters
                 view.FirstName = employee.EmployeeFirstName;
                 view.LastName = employee.EmployeeLastName;
                 view.Position = employee.EmployeePosition;
-                view.Salary = employee.EmployeeSalary.ToString();
+                view.Salary = employee.EmployeeSalary.ToString();                
+                view.CountryName = employee.EmployeeCountryName;
+                view.CityName = employee.EmployeeCityName;
                 view.StreetName = employee.EmployeeStreetName;
                 view.HouseNumber = employee.EmployeeHouseNumber;
+                view.ApartmentID = employee.EmployeeApartmentID.ToString();
                 view.ApartmentNumber = employee.EmployeeApartmentNumber;
                 view.FloorNumber = employee.EmployeeFloorNumber;
+                
+                var task = Task.Run(async delegate
+                {
+                    await GetLocation(employee);                    
+                });
+                task.Wait();
+
+                if (!view.IsLoadingData)
+                {                   
+                    SetComboBoxSelection(view.CountryNameComboBox, employee.EmployeeCountryID, employee.EmployeeCountryName);
+                    SetComboBoxSelection(view.CityNameComboBox, employee.EmployeeCityID, employee.EmployeeCityName);
+                    SetComboBoxSelection(view.StreetNameComboBox, employee.EmployeeStreetID, employee.EmployeeStreetName);
+                    SetComboBoxSelection(view.HouseComboBox, employee.EmployeeHouseID, employee.EmployeeHouseNumber);
+                    SetComboBoxSelection(view.ApartmentComboBox, employee.EmployeeApartmentID, employee.EmployeeApartmentNumber);
+                }                
 
                 view.IsEdit = true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred while loading the employee details: {ex.Message}");
-            }
+            }       
+        }
+
+        private async Task GetLocation(EmployeeModel employee)
+        {
+            await LoadCountries();
+            await LoadCities(employee.EmployeeCountryID);
+            await LoadStreets(employee.EmployeeCityID);
+            await LoadHouses(employee.EmployeeStreetID);
+            await LoadApartments(employee.EmployeeHouseID);
         }
 
         private async void AddNewEmployee(object? sender, EventArgs e)
         {
             view.IsEdit = false;
             await LoadCountries();
+            ClearComboBoxSelection(view.CountryNameComboBox);
+            view.CountryName = string.Empty;
         }
     }
 }
