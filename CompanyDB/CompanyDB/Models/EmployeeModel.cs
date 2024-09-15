@@ -30,6 +30,7 @@ namespace CompanyDB.Models
 
         // Properties - Validation
         [DisplayName("Id")]
+        [Required(ErrorMessage = "Id is required!")]
         public int EmployeeID { get => id; set => id = value; }
 
         [DisplayName("First Name")]
@@ -52,7 +53,8 @@ namespace CompanyDB.Models
         [RegularExpression(@"^\d{1,16}(\.\d{0,2})?$", ErrorMessage = "Salary must be a valid decimal!")]
         public decimal EmployeeSalary { get => salary; set => salary = value; }
 
-        [DisplayName("Country")]
+        [DisplayName("Country")]        
+        [Required(ErrorMessage = "Country is required!")]
         public string EmployeeCountryName
         {
             get => country.CountryName;
@@ -63,6 +65,7 @@ namespace CompanyDB.Models
         }
 
         [DisplayName("City")]
+        [Required(ErrorMessage = "City is required!")]
         public string EmployeeCityName
         {
             get => city.CityName;
@@ -70,6 +73,7 @@ namespace CompanyDB.Models
         }
 
         [DisplayName("Street")]
+        [Required(ErrorMessage = "Street is required!")]
         public string EmployeeStreetName
         {
             get => street.StreetName;
@@ -77,13 +81,14 @@ namespace CompanyDB.Models
         }
 
         [DisplayName("House")]
+        [Required(ErrorMessage = "House number is required!")]
         public string EmployeeHouseNumber
         {
             get => house.HouseNumber;
             set => house.HouseNumber = value;
         }
 
-        [DisplayName("Floor")]
+        [DisplayName("Floor")]        
         public string EmployeeFloorNumber
         {
             get => apartment.ApartmentFloorNumber;
@@ -91,6 +96,7 @@ namespace CompanyDB.Models
         }
 
         [DisplayName("Apartment")]
+        [Required(ErrorMessage = "Apartment number is required!")]
         public string EmployeeApartmentNumber
         {
             get => apartment.ApartmentNumber;
@@ -99,22 +105,22 @@ namespace CompanyDB.Models
 
         // CountryID won't be displayed
         [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
+        [EditorBrowsable(EditorBrowsableState.Never)]        
         public int EmployeeCountryID { get => country.CountryID; set => country.CountryID = value; }
 
         // CityID won't be displayed
         [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
+        [EditorBrowsable(EditorBrowsableState.Never)]        
         public int EmployeeCityID { get => city.CityID; set => city.CityID = value; }
 
         // StreetID won't be displayed
         [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
+        [EditorBrowsable(EditorBrowsableState.Never)]        
         public int EmployeeStreetID { get => street.StreetID; set => street.StreetID = value; }
 
         // HouseID won't be displayed
         [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
+        [EditorBrowsable(EditorBrowsableState.Never)]        
         public int EmployeeHouseID { get => house.HouseID; set => house.HouseID = value; }
 
         // ApartmentID won't be displayed
