@@ -2,6 +2,6 @@
 {
     public interface IMainView
     {
-        event EventHandler ShowEmployeeView;        
+        event EventHandler ShowEmployeeView;
     }
 }

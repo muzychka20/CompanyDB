@@ -83,49 +83,47 @@ namespace CompanyDB.Views
             };
 
             // Select country
-            comboBoxCountry.SelectedIndexChanged += delegate
+            comboBoxCountry.SelectedIndexChanged += (sender, e) =>
             {
                 if (comboBoxCountry.SelectedItem != null)
                 {
-                    if (comboBoxCountry.SelectedItem.ToString() == "Other")
-                    {
-                        txtCountryName.Visible = true;
-                        txtCountryName.Text = string.Empty;
-                        labelCountry.Visible = true;
-                        labelComboCity.Visible = false;
-                        comboBoxCity.DataSource = null;
-                        comboBoxCity.Visible = false;
-                        labelCity.Visible = true;
-                        txtCityName.Visible = true;
-                    }
-                    else
-                    {
-                        txtCountryName.Visible = false;
-                        labelCountry.Visible = false;
-                        labelComboCity.Visible = true;
-                        comboBoxCity.Visible = true;
-                        labelCity.Visible = false;
-                        txtCityName.Visible = false;                        
-                        OnChangeCountry?.Invoke();
-                    }
+                    OnChangeCountry?.Invoke();
                 }
             };
 
             // Select city
-            comboBoxCity.SelectedIndexChanged += delegate
+            comboBoxCity.SelectedIndexChanged += (sender, e) =>
             {
                 if (comboBoxCity.SelectedItem != null)
                 {
-                    if (comboBoxCity.SelectedItem.ToString() == "Other")
-                    {
-                        labelCity.Visible = true;
-                        txtCityName.Visible = true;
-                    }
-                    else
-                    {
-                        labelCity.Visible = false;
-                        txtCityName.Visible = false;
-                    }
+                    OnChangeCity?.Invoke();
+                }
+            };
+
+            // Select street
+            comboBoxStreet.SelectedIndexChanged += (sender, e) =>
+            {
+                if (comboBoxStreet.SelectedItem != null)
+                {
+                    OnChangeStreet?.Invoke();
+                }
+            };
+
+            // Select house
+            comboBoxHouse.SelectedIndexChanged += (sender, e) =>
+            {
+                if (comboBoxHouse.SelectedItem != null)
+                {
+                    OnChangeHouse?.Invoke();
+                }
+            };
+
+            // Select apartment
+            comboBoxApartment.SelectedIndexChanged += (sender, e) =>
+            {
+                if (comboBoxApartment.SelectedItem != null)
+                {
+                    OnChangeApartment?.Invoke();
                 }
             };
         }
@@ -156,69 +154,78 @@ namespace CompanyDB.Views
             get => txtSalary.Text;
             set => txtSalary.Text = value.ToString();
         }
-
+        public string ApartmentID { get; set; }
         public string CountryName
         {
-            get
-            {
-                if (comboBoxCountry.SelectedItem?.ToString() == "Other")
-                {
-                    return txtCountryName.Text;
-                }
-                return comboBoxCountry.SelectedItem?.ToString();
-            }
+            get => comboBoxCountry.SelectedItem?.ToString() ?? string.Empty;
             set
             {
-                if (comboBoxCountry.SelectedItem?.ToString() == "Other")
-                {
-                    comboBoxCountry.SelectedItem = txtCountryName.Text;
-                }
-                else
-                {
+                if (comboBoxCountry.Items.Contains(value))
                     comboBoxCountry.SelectedItem = value;
-                }
             }
         }
-
         public string CityName
         {
-            get
-            {
-                if (comboBoxCity.SelectedItem?.ToString() == "Other" || comboBoxCountry.SelectedItem?.ToString() == "Other")
-                {
-                    return txtCityName.Text;
-                }
-                return comboBoxCity.SelectedItem?.ToString();
-            }
+            get => comboBoxCity.SelectedItem?.ToString() ?? string.Empty;
             set
             {
-                comboBoxCity.SelectedItem = value;
+                if (comboBoxCity.Items.Contains(value))
+                    comboBoxCity.SelectedItem = value;
             }
         }
-
         public string StreetName
         {
-            get => txtStreetName.Text;
-            set => txtStreetName.Text = value;
+            get => comboBoxStreet.SelectedItem?.ToString() ?? string.Empty;
+            set
+            {
+                if (comboBoxStreet.Items.Contains(value))
+                    comboBoxStreet.SelectedItem = value;
+            }
         }
-
         public string HouseNumber
         {
-            get => txtHouseNumber.Text;
-            set => txtHouseNumber.Text = value;
+            get => comboBoxHouse.SelectedItem?.ToString() ?? string.Empty;
+            set
+            {
+                if (comboBoxHouse.Items.Contains(value))
+                    comboBoxHouse.SelectedItem = value;
+            }
         }
-        public string FloorNumber
-        {
-            get => txtFloorNumber.Text;
-            set => txtFloorNumber.Text = value;
-        }
-
         public string ApartmentNumber
         {
-            get => txtApartmentNumber.Text;
-            set => txtApartmentNumber.Text = value;
+            get => comboBoxApartment.SelectedItem?.ToString() ?? string.Empty;
+            set
+            {
+                if (comboBoxApartment.Items.Contains(value))
+                    comboBoxApartment.SelectedItem = value;
+            }
         }
-
+        public string FloorNumber { get; set; }
+        public ComboBox CountryNameComboBox
+        {
+            get => comboBoxCountry;
+            set => comboBoxCountry = value;
+        }
+        public ComboBox CityNameComboBox
+        {
+            get => comboBoxCity;
+            set => comboBoxCity = value;
+        }
+        public ComboBox StreetNameComboBox
+        {
+            get => comboBoxStreet;
+            set => comboBoxStreet = value;
+        }
+        public ComboBox HouseComboBox
+        {
+            get => comboBoxHouse;
+            set => comboBoxHouse = value;
+        }
+        public ComboBox ApartmentComboBox
+        {
+            get => comboBoxApartment;
+            set => comboBoxApartment = value;
+        }
         public bool IsEdit
         {
             get => isEdit;
@@ -234,17 +241,6 @@ namespace CompanyDB.Views
             get => message;
             set => message = value;
         }
-        ComboBox IEmployeeView.CountryNameComboBox
-        {
-            get => comboBoxCountry;
-            set => comboBoxCountry = value;
-        }
-
-        ComboBox IEmployeeView.CityNameComboBox
-        {
-            get => comboBoxCity;
-            set => comboBoxCity = value;
-        }
 
         // Events        
         public event EventHandler ShowAllEvent;
@@ -252,14 +248,18 @@ namespace CompanyDB.Views
         public event EventHandler EditEvent;
         public event EventHandler DeleteEvent;
         public event EventHandler SaveEvent;
-        public event EventHandler CancelEvent;        
+        public event EventHandler CancelEvent;
         public event Action OnChangeCountry;
+        public event Action OnChangeCity;
+        public event Action OnChangeStreet;
+        public event Action OnChangeHouse;
+        public event Action OnChangeApartment;
 
         // Methods
         public void SetEmployeeListBindingSource(BindingSource employeeList)
         {
             dataGridView.DataSource = employeeList;
-        }        
+        }
 
         // Singleton pattern (Open a single form instance)
         private static EmployeeView instance;
@@ -281,6 +281,6 @@ namespace CompanyDB.Views
                 instance.BringToFront();
             }
             return instance;
-        }       
+        }
     }
 }

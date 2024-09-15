@@ -15,6 +15,6 @@ namespace CompanyDB.Views
             btnExit.Click += delegate { this.Close(); };
         }
 
-        public event EventHandler ShowEmployeeView;        
+        public event EventHandler ShowEmployeeView;
     }
 }
