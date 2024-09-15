@@ -2,11 +2,9 @@
 {
     public interface IEmployeeRepository
     {
-        void AddEmployee(EmployeeModel employeeModel);
-        void UpdateEmployee(EmployeeModel employeeModel);
-        void DeleteEmployee(int id);
-        IEnumerable<EmployeeModel> GetAllEmployees();
-        Task<IEnumerable<string>> GetAllCountries();
-        Task<IEnumerable<string>> GetCitiesByCountryName(string countryName);        
+        public void AddEmployee(EmployeeModel employeeModel);
+        public void DeleteEmployee(int id);
+        public void UpdateEmployee(EmployeeModel employeeModel);
+        public IEnumerable<EmployeeModel> GetAllEmployees();
     }
 }

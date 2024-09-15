@@ -1,78 +1,125 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using Microsoft.VisualBasic.Devices;
 
 namespace CompanyDB.Models
 {
     public class EmployeeModel
     {
         // Fields 
-        private int id;
-        private string firstName;
-        private string lastName;
-        private string position;
-        private decimal salary;
-        
-        // Address
-        private string countryName;
-        private string cityName;
-        private string streetName;
-        private string houseNumber;
-        private string floorNumber;
-        private string apartmentNumber;
+        protected int id;
+        protected string firstName;
+        protected string lastName;
+        protected string position;
+        protected decimal salary;
+        protected CountryModel country;
+        protected CityModel city;
+        protected StreetModel street;
+        protected HouseModel house;
+        protected ApartmentModel apartment;
 
+        // Constructor
+        public EmployeeModel()
+        {
+            country = new CountryModel();
+            city = new CityModel();
+            street = new StreetModel();
+            house = new HouseModel();
+            apartment = new ApartmentModel();
+        }
 
         // Properties - Validation
         [DisplayName("Id")]
-        public int Id { get => id; set => id = value; }
+        public int EmployeeID { get => id; set => id = value; }
 
         [DisplayName("First Name")]
         [Required(ErrorMessage = "First Name is required!")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "First Name must be between 3 and 50 characters!")]
-        public string FirstName { get => firstName; set => firstName = value; }
+        public string EmployeeFirstName { get => firstName; set => firstName = value; }
 
         [DisplayName("Last Name")]
         [Required(ErrorMessage = "Last Name is required!")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Last Name must be between 3 and 50 characters!")]
-        public string LastName { get => lastName; set => lastName = value; }
+        public string EmployeeLastName { get => lastName; set => lastName = value; }
 
         [DisplayName("Position")]
         [Required(ErrorMessage = "Position is required!")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Position must be between 3 and 50 characters!")]
-        public string Position { get => position; set => position = value; }
+        public string EmployeePosition { get => position; set => position = value; }
 
         [DisplayName("Salary")]
         [Required(ErrorMessage = "Salary is required!")]
         [RegularExpression(@"^\d{1,16}(\.\d{0,2})?$", ErrorMessage = "Salary must be a valid decimal!")]
-        public decimal Salary { get => salary; set => salary = value; }
+        public decimal EmployeeSalary { get => salary; set => salary = value; }
 
         [DisplayName("Country")]
-        [Required(ErrorMessage = "Country is required!")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Country must be between 3 and 50 characters!")]
-        public string CountryName { get => countryName; set => countryName = value; }
+        public string EmployeeCountryName
+        {
+            get => country.CountryName;
+            set
+            {
+                country.CountryName = value;
+            }
+        }
 
         [DisplayName("City")]
-        [Required(ErrorMessage = "City is required!")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "City must be between 3 and 50 characters!")]
-        public string CityName { get => cityName; set => cityName = value; }
+        public string EmployeeCityName
+        {
+            get => city.CityName;
+            set => city.CityName = value;
+        }
 
         [DisplayName("Street")]
-        [Required(ErrorMessage = "Street is required!")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Street must be between 3 and 50 characters!")]
-        public string StreetName { get => streetName; set => streetName = value; }
+        public string EmployeeStreetName
+        {
+            get => street.StreetName;
+            set => street.StreetName = value;
+        }
 
-        [DisplayName("House Number")]
-        [Required(ErrorMessage = "House Number is required!")]
-        [StringLength(10, MinimumLength = 1, ErrorMessage = "Street must be between 1 and 10 characters!")]
-        public string HouseNumber { get => houseNumber; set => houseNumber = value; }
+        [DisplayName("House")]
+        public string EmployeeHouseNumber
+        {
+            get => house.HouseNumber;
+            set => house.HouseNumber = value;
+        }
 
-        [DisplayName("Floor Number")]
-        [Required(ErrorMessage = "Floor Number is required!")]
-        [StringLength(10, MinimumLength = 1, ErrorMessage = "Floor must be between 1 and 10 characters!")]
-        public string FloorNumber { get => floorNumber; set => floorNumber = value; }
+        [DisplayName("Floor")]
+        public string EmployeeFloorNumber
+        {
+            get => apartment.ApartmentFloorNumber;
+            set => apartment.ApartmentFloorNumber = value;
+        }
 
-        [DisplayName("Apartment Number")]
-        [Required(ErrorMessage = "Apartment Number is required!")]
-        [StringLength(10, MinimumLength = 1, ErrorMessage = "Apartment must be between 1 and 10 characters!")]
-        public string ApartmentNumber { get => apartmentNumber; set => apartmentNumber = value; }
+        [DisplayName("Apartment")]
+        public string EmployeeApartmentNumber
+        {
+            get => apartment.ApartmentNumber;
+            set => apartment.ApartmentNumber = value;
+        }
+
+        // CountryID won't be displayed
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public int EmployeeCountryID { get => country.CountryID; set => country.CountryID = value; }
+
+        // CityID won't be displayed
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public int EmployeeCityID { get => city.CityID; set => city.CityID = value; }
+
+        // StreetID won't be displayed
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public int EmployeeStreetID { get => street.StreetID; set => street.StreetID = value; }
+
+        // HouseID won't be displayed
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public int EmployeeHouseID { get => house.HouseID; set => house.HouseID = value; }
+
+        // ApartmentID won't be displayed
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public int EmployeeApartmentID { get => apartment.ApartmentID; set => apartment.ApartmentID = value; }
     }
 }
