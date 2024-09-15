@@ -1,24 +1,25 @@
 # Employee Management System
 
-This Employee Management System allows for easy management of employees, including adding, editing, and deleting employees, with support for country and city selection. The system includes several key features such as event-driven handling of user inputs and a responsive UI built using WinForms. The project follows the MVP (Model-View-Presenter) pattern.
+This system is designed to streamline employee management, allowing users to add, edit, delete, and view employee details through a user-friendly interface. The system leverages dropdown menus to handle country, city, street, house and apartment selection, ensuring data consistency and flexibility for users. The design follows the **Model-View-Presenter (MVP)** pattern to maintain separation of concerns between the UI and business logic.
 
 ![List](docs/list.png)
 
-## Features
+## Key Features
 
-- **Employee Management**: Add, edit, and delete employees with fields like name, position, salary, and address details.
-- **Country and City Selection**: Users can select a country from a dropdown list, which then loads the corresponding cities. If a required country or city is missing, users can add new ones.
-- **Validation**: Built-in validation for employee details to ensure accurate data entry.
-- **Event-Driven Design**: The UI reacts to user actions using events like `AddNewEvent`, `EditEvent`, `DeleteEvent`, and more.
-- **MVP Architecture**: Follows the Model-View-Presenter architecture to separate concerns, improving testability and maintainability.
+- **Employee Management**: Manage employees by adding, editing, and deleting records with fields such as name, position, salary, and address details (country, city, street, house and apartment).
+- **Data Validation**: Built-in validation for ensuring the accuracy of employee data such as first name, last name, salary, position and location before submission.
+- **MVP Architecture**: The project follows the **MVP pattern**, enhancing testability and maintainability by separating concerns between data models and presentation logic.
+- **Address Management**: In addition to basic employee details, users can manage extended address information through dropdown lists, including country, city, street, house, and apartment number.
 
 ![Add](docs/add1.png)
 
 ## Technologies Used
 
-- **C# / .NET Framework**: The main language used for building the Windows Forms application.
-- **WinForms**: For building the graphical user interface.
-- **MVP Pattern**: Ensures a clear separation of concerns between the UI and business logic.
-- **SQL**: Database connectivity for retrieving and storing employee's data.
+- **C# / .NET Framework**: Core language and framework used for developing the application.
+- **WinForms**: Provides a responsive and interactive graphical user interface.
+- **MVP Architecture**: Helps in organizing the code and making the application scalable and easy to maintain.
+- **SQL Database**: Stores employee information, including relationships between countries, cities, and addresses for easy retrieval and manipulation.
 
 ![Add Other](docs/add2.png)
+
+**Note**: The dropdown lists provide a reference-based selection for fields such as country, city, and other address details, helping users navigate and fill in employee information efficiently beyond just name, salary, and position.
