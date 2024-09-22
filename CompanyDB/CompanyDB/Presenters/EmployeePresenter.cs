@@ -296,7 +296,7 @@ namespace CompanyDB.Presenters
             ClearComboBox(view.CityNameComboBox);
             ClearComboBox(view.StreetNameComboBox);
             ClearComboBox(view.HouseComboBox);
-            ClearComboBox(view.ApartmentComboBox);
+            ClearComboBox(view.ApartmentComboBox);            
         }
 
         // Clear list of options in ComboBox
@@ -320,11 +320,9 @@ namespace CompanyDB.Presenters
         // Set the selection for ComboBox
         private void SetComboBoxSelection(ComboBox comboBox, object selectedValue, string displayText)
         {
-            if (comboBox.DataSource != null)
-            {
-                comboBox.SelectedValue = selectedValue;
-                comboBox.Text = displayText;
-            }
+            comboBox.SelectedValue = selectedValue;
+            comboBox.Text = displayText;
+
         }
 
         private void DeleteSelectedEmployee(object? sender, EventArgs e)
@@ -350,7 +348,7 @@ namespace CompanyDB.Presenters
             {
                 // Get the selected employee from the binding source
                 var employee = (EmployeeModel)employeeBindingSource.Current;
-
+                
                 view.Id = employee.EmployeeID.ToString();
                 view.FirstName = employee.EmployeeFirstName;
                 view.LastName = employee.EmployeeLastName;
@@ -364,17 +362,7 @@ namespace CompanyDB.Presenters
                 view.ApartmentNumber = employee.EmployeeApartmentNumber;
                 view.FloorNumber = employee.EmployeeFloorNumber;
 
-                await GetLocation(employee);
-
-
-                if (!view.IsLoadingData)
-                {
-                    SetComboBoxSelection(view.CountryNameComboBox, employee.EmployeeCountryID, employee.EmployeeCountryName);
-                    SetComboBoxSelection(view.CityNameComboBox, employee.EmployeeCityID, employee.EmployeeCityName);
-                    SetComboBoxSelection(view.StreetNameComboBox, employee.EmployeeStreetID, employee.EmployeeStreetName);
-                    SetComboBoxSelection(view.HouseComboBox, employee.EmployeeHouseID, employee.EmployeeHouseNumber);
-                    SetComboBoxSelection(view.ApartmentComboBox, employee.EmployeeApartmentID, employee.EmployeeApartmentNumber);
-                }
+                await GetLocation(employee);                
 
                 view.IsEdit = true;
             }
@@ -387,10 +375,19 @@ namespace CompanyDB.Presenters
         private async Task GetLocation(EmployeeModel employee)
         {
             await LoadCountries();
+            SetComboBoxSelection(view.CountryNameComboBox, employee.EmployeeCountryID, employee.EmployeeCountryName);
+
             await LoadCities(employee.EmployeeCountryID);
+            SetComboBoxSelection(view.CityNameComboBox, employee.EmployeeCityID, employee.EmployeeCityName);
+
             await LoadStreets(employee.EmployeeCityID);
+            SetComboBoxSelection(view.StreetNameComboBox, employee.EmployeeStreetID, employee.EmployeeStreetName);
+
             await LoadHouses(employee.EmployeeStreetID);
+            SetComboBoxSelection(view.HouseComboBox, employee.EmployeeHouseID, employee.EmployeeHouseNumber);
+
             await LoadApartments(employee.EmployeeHouseID);
+            SetComboBoxSelection(view.ApartmentComboBox, employee.EmployeeApartmentID, employee.EmployeeApartmentNumber);
         }
 
         private async void AddNewEmployee(object? sender, EventArgs e)
