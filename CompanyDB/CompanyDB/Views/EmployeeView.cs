@@ -92,6 +92,11 @@ namespace CompanyDB.Views
                 }
             };
 
+            comboBoxCountry.Click += (sender, e) =>
+            {
+                OnClickCountry?.Invoke();                
+            };
+
             // Select city
             comboBoxCity.SelectedIndexChanged += (sender, e) =>
             {
@@ -99,6 +104,11 @@ namespace CompanyDB.Views
                 {
                     OnChangeCity?.Invoke();
                 }
+            };
+
+            comboBoxCity.Click += (sender, e) =>
+            {
+                OnClickCity?.Invoke();
             };
 
             // Select street
@@ -110,6 +120,11 @@ namespace CompanyDB.Views
                 }
             };
 
+            comboBoxStreet.Click += (sender, e) =>
+            {
+                OnClickStreet?.Invoke();
+            };
+
             // Select house
             comboBoxHouse.SelectedIndexChanged += (sender, e) =>
             {
@@ -117,6 +132,11 @@ namespace CompanyDB.Views
                 {
                     OnChangeHouse?.Invoke();
                 }
+            };
+
+            comboBoxHouse.Click += (sender, e) =>
+            {
+                OnClickHouse?.Invoke();
             };
 
             // Select apartment
@@ -260,6 +280,10 @@ namespace CompanyDB.Views
         public event Action OnChangeStreet;
         public event Action OnChangeHouse;
         public event Action OnChangeApartment;
+        public event Action OnClickCountry;
+        public event Action OnClickCity;
+        public event Action OnClickStreet;
+        public event Action OnClickHouse;        
 
         // Methods
         public void SetEmployeeListBindingSource(BindingSource employeeList)

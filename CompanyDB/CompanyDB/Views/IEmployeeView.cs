@@ -79,6 +79,10 @@
         event Action OnChangeStreet;
         event Action OnChangeHouse;
         event Action OnChangeApartment;
+        event Action OnClickCountry;
+        event Action OnClickCity;
+        event Action OnClickStreet;
+        event Action OnClickHouse;        
 
         // Methods
         void SetEmployeeListBindingSource(BindingSource employeeList);

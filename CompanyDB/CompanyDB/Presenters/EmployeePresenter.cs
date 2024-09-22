@@ -45,12 +45,42 @@ namespace CompanyDB.Presenters
             this.view.OnChangeStreet += OnChangeStreet;
             this.view.OnChangeHouse += OnChangeHouse;
             this.view.OnChangeApartment += OnChangeApartment;
-
+            this.view.OnClickCountry += OnClickCountry;
+            this.view.OnClickCity += OnClickCity;
+            this.view.OnClickStreet += OnClickStreet;
+            this.view.OnClickHouse += OnClickHouse;
+            
             // Set employees binding source
             this.view.SetEmployeeListBindingSource(employeeBindingSource);
 
             // Show view            
             this.view.Show();
+        }
+
+        private void OnClickHouse()
+        {
+            ClearComboBoxSelection(view.ApartmentComboBox);
+        }
+
+        private void OnClickStreet()
+        {
+            ClearComboBoxSelection(view.HouseComboBox);
+            ClearComboBoxSelection(view.ApartmentComboBox);
+        }
+
+        private void OnClickCity()
+        {
+            ClearComboBoxSelection(view.StreetNameComboBox);
+            ClearComboBoxSelection(view.HouseComboBox);
+            ClearComboBoxSelection(view.ApartmentComboBox);
+        }
+
+        private void OnClickCountry()
+        {
+            ClearComboBoxSelection(view.CityNameComboBox);
+            ClearComboBoxSelection(view.StreetNameComboBox);
+            ClearComboBoxSelection(view.HouseComboBox);
+            ClearComboBoxSelection(view.ApartmentComboBox);
         }
 
         // Methods
@@ -296,7 +326,7 @@ namespace CompanyDB.Presenters
             ClearComboBox(view.CityNameComboBox);
             ClearComboBox(view.StreetNameComboBox);
             ClearComboBox(view.HouseComboBox);
-            ClearComboBox(view.ApartmentComboBox);            
+            ClearComboBox(view.ApartmentComboBox);
         }
 
         // Clear list of options in ComboBox
@@ -348,7 +378,7 @@ namespace CompanyDB.Presenters
             {
                 // Get the selected employee from the binding source
                 var employee = (EmployeeModel)employeeBindingSource.Current;
-                
+
                 view.Id = employee.EmployeeID.ToString();
                 view.FirstName = employee.EmployeeFirstName;
                 view.LastName = employee.EmployeeLastName;
@@ -362,7 +392,7 @@ namespace CompanyDB.Presenters
                 view.ApartmentNumber = employee.EmployeeApartmentNumber;
                 view.FloorNumber = employee.EmployeeFloorNumber;
 
-                await GetLocation(employee);                
+                await GetLocation(employee);
 
                 view.IsEdit = true;
             }
