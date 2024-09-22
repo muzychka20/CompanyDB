@@ -268,8 +268,8 @@ namespace CompanyDB.Presenters
             string apartmentNumber = "";
             string floorNumber = "";
 
-            // Regular expression to match the pattern "532 (Floor: 7)"
-            var match = Regex.Match(apartmentDetail, @"(\d+)\s*\(Floor:\s*(\d+)\)");
+            // Regular expression to match the pattern "532VB (Floor: 7a)"
+            var match = Regex.Match(apartmentDetail, @"([A-Za-z0-9]+)\s*\(Floor:\s*([A-Za-z0-9]+)\)");
 
             if (match.Success)
             {
