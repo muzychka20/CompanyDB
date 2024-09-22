@@ -65,14 +65,17 @@ namespace CompanyDB.Presenters
         private void OnClickStreet()
         {
             ClearComboBoxSelection(view.HouseComboBox);
-            ClearComboBoxSelection(view.ApartmentComboBox);
+            ClearComboBoxSelection(view.ApartmentComboBox);            
+            view.ApartmentComboBox.Enabled = false;
         }
 
         private void OnClickCity()
         {
             ClearComboBoxSelection(view.StreetNameComboBox);
             ClearComboBoxSelection(view.HouseComboBox);
-            ClearComboBoxSelection(view.ApartmentComboBox);
+            ClearComboBoxSelection(view.ApartmentComboBox);                        
+            view.HouseComboBox.Enabled = false;
+            view.ApartmentComboBox.Enabled = false;
         }
 
         private void OnClickCountry()
@@ -80,7 +83,10 @@ namespace CompanyDB.Presenters
             ClearComboBoxSelection(view.CityNameComboBox);
             ClearComboBoxSelection(view.StreetNameComboBox);
             ClearComboBoxSelection(view.HouseComboBox);
-            ClearComboBoxSelection(view.ApartmentComboBox);
+            ClearComboBoxSelection(view.ApartmentComboBox);            
+            view.StreetNameComboBox.Enabled = false;
+            view.HouseComboBox.Enabled = false;
+            view.ApartmentComboBox.Enabled = false;
         }
 
         // Methods
@@ -188,6 +194,7 @@ namespace CompanyDB.Presenters
                 int selectedCountryId = selectedCountry.CountryID;
                 view.CountryName = selectedCountry.CountryName;
                 await LoadCities(selectedCountryId);
+                view.CityNameComboBox.Enabled = true;
             }
         }
 
@@ -202,6 +209,7 @@ namespace CompanyDB.Presenters
                 int selectedCityId = selectedCity.CityID;
                 view.CityName = selectedCity.CityName;
                 await LoadStreets(selectedCityId);
+                view.StreetNameComboBox.Enabled = true;
             }
         }
 
@@ -216,6 +224,7 @@ namespace CompanyDB.Presenters
                 int selectedStreetId = selectedStreet.StreetID;
                 view.StreetName = selectedStreet.StreetName;
                 await LoadHouses(selectedStreetId);
+                view.HouseComboBox.Enabled = true;
             }
         }
 
@@ -230,6 +239,7 @@ namespace CompanyDB.Presenters
                 int selectedHouseId = selectedHouse.HouseID;
                 view.HouseNumber = selectedHouse.HouseNumber;
                 await LoadApartments(selectedHouseId);
+                view.ApartmentComboBox.Enabled = true;
             }
         }
 
@@ -327,6 +337,10 @@ namespace CompanyDB.Presenters
             ClearComboBox(view.StreetNameComboBox);
             ClearComboBox(view.HouseComboBox);
             ClearComboBox(view.ApartmentComboBox);
+            view.CityNameComboBox.Enabled = false;
+            view.StreetNameComboBox.Enabled = false;
+            view.HouseComboBox.Enabled = false;
+            view.ApartmentComboBox.Enabled = false;
         }
 
         // Clear list of options in ComboBox
@@ -394,6 +408,12 @@ namespace CompanyDB.Presenters
 
                 await GetLocation(employee);
 
+                view.CityNameComboBox.Enabled = true;
+                view.CityNameComboBox.Enabled = true;
+                view.StreetNameComboBox.Enabled = true;
+                view.HouseComboBox.Enabled = true;
+                view.ApartmentComboBox.Enabled = true;
+
                 view.IsEdit = true;
             }
             catch (Exception ex)
@@ -425,6 +445,10 @@ namespace CompanyDB.Presenters
             view.IsEdit = false;
             await LoadCountries();
             ClearComboBoxSelection(view.CountryNameComboBox);
+            view.CityNameComboBox.Enabled = false;
+            view.StreetNameComboBox.Enabled = false;
+            view.HouseComboBox.Enabled = false;
+            view.ApartmentComboBox.Enabled = false;
         }
     }
 }
