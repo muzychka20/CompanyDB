@@ -37,6 +37,5 @@ namespace CompanyDB._Repositories
             }
             return apartments;
         }
-
     }
 }

@@ -12,11 +12,6 @@ namespace CompanyDB.Models
         private string countryName;
 
         public int CountryID { get => countryId; set => countryId = value; }
-        public string CountryName { get => countryName; set => countryName = value; }
-
-        public override string ToString()
-        {
-            return CountryName;
-        }
+        public string CountryName { get => countryName; set => countryName = value; }       
     }
 }

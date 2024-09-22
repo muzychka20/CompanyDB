@@ -12,11 +12,6 @@ namespace CompanyDB.Models
         private string streetName;
 
         public int StreetID { get => streetId; set => streetId = value; }
-        public string StreetName { get => streetName; set => streetName = value; }
-
-        public override string ToString()
-        {
-            return StreetName;
-        }
+        public string StreetName { get => streetName; set => streetName = value; }       
     }
 }

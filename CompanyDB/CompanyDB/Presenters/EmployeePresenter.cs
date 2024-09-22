@@ -16,7 +16,7 @@ namespace CompanyDB.Presenters
         private IHouseRepository houseRepository;
         private IApartmentRepository apartmentRepository;
         private BindingSource employeeBindingSource;
-        private IEnumerable<EmployeeModel> employeeList;                
+        private IEnumerable<EmployeeModel> employeeList;
 
         // Constructor
         public EmployeePresenter(IEmployeeView view,
@@ -44,7 +44,7 @@ namespace CompanyDB.Presenters
             this.view.OnChangeCity += OnChangeCity;
             this.view.OnChangeStreet += OnChangeStreet;
             this.view.OnChangeHouse += OnChangeHouse;
-            this.view.OnChangeApartment += OnChangeApartment;            
+            this.view.OnChangeApartment += OnChangeApartment;
 
             // Set employees binding source
             this.view.SetEmployeeListBindingSource(employeeBindingSource);
@@ -58,7 +58,7 @@ namespace CompanyDB.Presenters
         {
             employeeList = employeeRepository.GetAllEmployees();
             employeeBindingSource.DataSource = employeeList; // Set data source           
-        }        
+        }
 
         // Load countries
         private async Task LoadCountries()
@@ -69,7 +69,7 @@ namespace CompanyDB.Presenters
                 IEnumerable<CountryModel> countries = await countryRepository.GetAllCountries();
                 view.CountryNameComboBox.DataSource = countries;
                 view.CountryNameComboBox.DisplayMember = "CountryName";
-                view.CountryNameComboBox.ValueMember = "CountryID";                                
+                view.CountryNameComboBox.ValueMember = "CountryID";
             }
             finally
             {
@@ -79,7 +79,7 @@ namespace CompanyDB.Presenters
 
         // Load cities based on selected country
         private async Task LoadCities(int countryId)
-        {            
+        {
             try
             {
                 view.IsLoadingData = true;
@@ -97,14 +97,14 @@ namespace CompanyDB.Presenters
         // Load streets based on selected city
         private async Task LoadStreets(int cityId)
         {
-           
+
             try
             {
                 view.IsLoadingData = true;
                 IEnumerable<StreetModel> streets = await streetRepository.GetStreetsByCityId(cityId);
                 view.StreetNameComboBox.DataSource = streets;
                 view.StreetNameComboBox.DisplayMember = "StreetName";
-                view.StreetNameComboBox.ValueMember = "StreetID";                             
+                view.StreetNameComboBox.ValueMember = "StreetID";
             }
             finally
             {
@@ -115,14 +115,14 @@ namespace CompanyDB.Presenters
 
         // Load houses based on selected street
         private async Task LoadHouses(int streetId)
-        {            
+        {
             try
             {
                 view.IsLoadingData = true;
                 IEnumerable<HouseModel> houses = await houseRepository.GetHousesByStreetId(streetId);
                 view.HouseComboBox.DataSource = houses;
                 view.HouseComboBox.DisplayMember = "HouseNumber";
-                view.HouseComboBox.ValueMember = "HouseID";                                                              
+                view.HouseComboBox.ValueMember = "HouseID";
             }
             finally
             {
@@ -139,7 +139,7 @@ namespace CompanyDB.Presenters
                 IEnumerable<ApartmentModel> apartments = await apartmentRepository.GetApartmentsByHouseId(houseId);
                 view.ApartmentComboBox.DataSource = apartments;
                 view.ApartmentComboBox.DisplayMember = "DisplayApartmentInfo";
-                view.ApartmentComboBox.ValueMember = "ApartmentID";                              
+                view.ApartmentComboBox.ValueMember = "ApartmentID";
             }
             finally
             {
@@ -149,7 +149,7 @@ namespace CompanyDB.Presenters
 
         // Handle country change
         private async void OnChangeCountry()
-        {            
+        {
             if (view.IsLoadingData)
                 return;
 
@@ -157,7 +157,7 @@ namespace CompanyDB.Presenters
             {
                 int selectedCountryId = selectedCountry.CountryID;
                 view.CountryName = selectedCountry.CountryName;
-                await LoadCities(selectedCountryId);                
+                await LoadCities(selectedCountryId);
             }
         }
 
@@ -171,7 +171,7 @@ namespace CompanyDB.Presenters
             {
                 int selectedCityId = selectedCity.CityID;
                 view.CityName = selectedCity.CityName;
-                await LoadStreets(selectedCityId);               
+                await LoadStreets(selectedCityId);
             }
         }
 
@@ -185,7 +185,7 @@ namespace CompanyDB.Presenters
             {
                 int selectedStreetId = selectedStreet.StreetID;
                 view.StreetName = selectedStreet.StreetName;
-                await LoadHouses(selectedStreetId);                
+                await LoadHouses(selectedStreetId);
             }
         }
 
@@ -199,7 +199,7 @@ namespace CompanyDB.Presenters
             {
                 int selectedHouseId = selectedHouse.HouseID;
                 view.HouseNumber = selectedHouse.HouseNumber;
-                await LoadApartments(selectedHouseId);                
+                await LoadApartments(selectedHouseId);
             }
         }
 
@@ -238,7 +238,7 @@ namespace CompanyDB.Presenters
                     EmployeeCityName = view.CityName,
                     EmployeeStreetName = view.StreetName,
                     EmployeeHouseNumber = view.HouseNumber,
-                    EmployeeApartmentID = Convert.ToInt32(view.ApartmentID),                    
+                    EmployeeApartmentID = Convert.ToInt32(view.ApartmentID),
                     EmployeeApartmentNumber = view.ApartmentNumber,
                 };
                 new Common.ModelDataValidation().Validate(model);
@@ -314,17 +314,17 @@ namespace CompanyDB.Presenters
         {
             comboBox.SelectedIndex = -1;
             comboBox.SelectedItem = null;
-            comboBox.Text = string.Empty;            
+            comboBox.Text = string.Empty;
         }
 
         // Set the selection for ComboBox
         private void SetComboBoxSelection(ComboBox comboBox, object selectedValue, string displayText)
         {
             if (comboBox.DataSource != null)
-            {                
+            {
                 comboBox.SelectedValue = selectedValue;
                 comboBox.Text = displayText;
-            }            
+            }
         }
 
         private void DeleteSelectedEmployee(object? sender, EventArgs e)
@@ -345,9 +345,9 @@ namespace CompanyDB.Presenters
         }
 
         private async void LoadSelectedEmployeeToEdit(object? sender, EventArgs e)
-        {            
+        {
             try
-            {  
+            {
                 // Get the selected employee from the binding source
                 var employee = (EmployeeModel)employeeBindingSource.Current;
 
@@ -355,7 +355,7 @@ namespace CompanyDB.Presenters
                 view.FirstName = employee.EmployeeFirstName;
                 view.LastName = employee.EmployeeLastName;
                 view.Position = employee.EmployeePosition;
-                view.Salary = employee.EmployeeSalary.ToString();                
+                view.Salary = employee.EmployeeSalary.ToString();
                 view.CountryName = employee.EmployeeCountryName;
                 view.CityName = employee.EmployeeCityName;
                 view.StreetName = employee.EmployeeStreetName;
@@ -365,39 +365,39 @@ namespace CompanyDB.Presenters
                 view.FloorNumber = employee.EmployeeFloorNumber;
 
                 await GetLocation(employee);
-                
+
 
                 if (!view.IsLoadingData)
-                {                   
+                {
                     SetComboBoxSelection(view.CountryNameComboBox, employee.EmployeeCountryID, employee.EmployeeCountryName);
                     SetComboBoxSelection(view.CityNameComboBox, employee.EmployeeCityID, employee.EmployeeCityName);
                     SetComboBoxSelection(view.StreetNameComboBox, employee.EmployeeStreetID, employee.EmployeeStreetName);
                     SetComboBoxSelection(view.HouseComboBox, employee.EmployeeHouseID, employee.EmployeeHouseNumber);
                     SetComboBoxSelection(view.ApartmentComboBox, employee.EmployeeApartmentID, employee.EmployeeApartmentNumber);
-                }                
+                }
 
                 view.IsEdit = true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred while loading the employee details: {ex.Message}");
-            }       
+            }
         }
 
         private async Task GetLocation(EmployeeModel employee)
         {
-            await LoadCountries();            
-            await LoadCities(employee.EmployeeCountryID);            
-            await LoadStreets(employee.EmployeeCityID);            
-            await LoadHouses(employee.EmployeeStreetID);            
-            await LoadApartments(employee.EmployeeHouseID);            
+            await LoadCountries();
+            await LoadCities(employee.EmployeeCountryID);
+            await LoadStreets(employee.EmployeeCityID);
+            await LoadHouses(employee.EmployeeStreetID);
+            await LoadApartments(employee.EmployeeHouseID);
         }
 
         private async void AddNewEmployee(object? sender, EventArgs e)
         {
             view.IsEdit = false;
             await LoadCountries();
-            ClearComboBoxSelection(view.CountryNameComboBox);            
+            ClearComboBoxSelection(view.CountryNameComboBox);
         }
     }
 }
